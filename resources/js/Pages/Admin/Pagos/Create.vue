@@ -24,7 +24,7 @@ const { setPago, limpiarPago, form } = usePagos();
             <div class="row">
                 <div class="col-sm-6">
                     <h3 class="m-0">
-                        <i class="fa fa-money-check-alt"></i> Nuevo Pago
+                        <i class="fa fa-list-alt"></i> Nuevo Pago
                     </h3>
                 </div>
                 <!-- /.col -->

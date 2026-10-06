@@ -119,7 +119,17 @@ class PagoController extends Controller
 
     public function edit(Pago $pago): ResponseInertia
     {
+        $pago = $pago->load(["pago_detalles", "pago_participantes"]);
         return Inertia::render("Admin/Pagos/Edit", compact("pago"));
+    }
+
+    public function distribuir(Pago $pago): ResponseInertia
+    {
+
+        $this->pagoService->distribuir($pago);
+        $pago = $pago->load(["pago_detalles", "pago_participantes", "pago_gastos.participante", "pago_gastos.gasto"]);
+
+        return Inertia::render("Admin/Pagos/Distribuir", compact("pago"));
     }
 
 

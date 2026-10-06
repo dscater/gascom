@@ -4,6 +4,7 @@ export const useParticipantes = () => {
     const initialState = {
         id: 0,
         nombre: "",
+        correo: "",
         descripcion: "",
         _method: "POST",
     };

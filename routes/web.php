@@ -43,8 +43,6 @@ Route::get("sincronizarClientesTramitador", [SincronizacionController::class, 's
 Route::middleware(['auth', 'permisoUsuario'])->prefix("admin")->group(function () {
     // INICIO
     Route::get('/inicio', [InicioController::class, 'inicio'])->name('inicio');
-    Route::get('/pagosCampeonato', [InicioController::class, 'pagosCampeonato'])->name('pagosCampeonato');
-    Route::get('/golesPorCarrera', [InicioController::class, 'golesPorCarrera'])->name('golesPorCarrera');
 
     // CONFIGURACION
     Route::resource("configuracions", ConfiguracionController::class)->only(
@@ -93,7 +91,7 @@ Route::middleware(['auth', 'permisoUsuario'])->prefix("admin")->group(function (
     // PAGOS
     Route::get("pagos/paginado", [PagoController::class, 'paginado'])->name("pagos.paginado");
     Route::get("pagos/listado", [PagoController::class, 'listado'])->name("pagos.listado");
-    Route::patch("pagos/finalizar/{campeonato}", [PagoController::class, 'finalizar'])->name("pagos.finalizar");
+    Route::get("pagos/distribuir/{pago}", [PagoController::class, 'distribuir'])->name("pagos.distribuir");
     Route::resource("pagos", PagoController::class)->only(
         ["index", "create", "store", "edit", "show", "update", "destroy"]
     );

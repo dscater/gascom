@@ -8,6 +8,7 @@ class Participante extends Model
 {
     protected $fillable = [
         "nombre",
+        "correo",
         "descripcion"
     ];
 }

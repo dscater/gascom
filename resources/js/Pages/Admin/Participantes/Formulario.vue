@@ -137,7 +137,7 @@ onMounted(() => {});
                     <span class="text-danger">(*)</span> son obligatorios.
                 </p>
                 <div class="row">
-                    <div class="col-md-6 mt-2">
+                    <div class="col-md-4 mt-2">
                         <label class="required">Nombre del Participante</label>
                         <el-input
                             type="text"
@@ -156,7 +156,26 @@ onMounted(() => {});
                             </li>
                         </ul>
                     </div>
-                    <div class="col-md-6 mt-2">
+                    <div class="col-md-4 mt-2">
+                        <label class="required">Correo del Participante</label>
+                        <el-input
+                            type="text"
+                            :class="{
+                                'parsley-error': form.errors?.correo,
+                            }"
+                            v-model="form.correo"
+                            autosize
+                        ></el-input>
+                        <ul
+                            v-if="form.errors?.correo"
+                            class="d-block text-danger list-unstyled"
+                        >
+                            <li class="parsley-required">
+                                {{ form.errors?.correo }}
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4 mt-2">
                         <label class="">Descripción</label>
                         <el-input
                             type="textarea"

@@ -37,6 +37,11 @@ const headers = [
         sortable: true,
     },
     {
+        label: "CORREO",
+        key: "correo",
+        sortable: true,
+    },
+    {
         label: "DESCRIPCIÓN",
         key: "descripcion",
         sortable: true,

@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('participantes', function (Blueprint $table) {
             $table->id();
             $table->string("nombre")->unique();
+            $table->string("correo")->unique();
             $table->string("descripcion")->nullable();
             $table->timestamps();
         });

@@ -113,6 +113,7 @@ class ParticipanteService
     {
         $participante = Participante::create([
             "nombre" => mb_strtoupper($datos["nombre"]),
+            "correo" => mb_strtolower($datos["correo"]),
             "descripcion" => mb_strtoupper($datos["descripcion"]) ?? NULL,
         ]);
 
@@ -133,10 +134,11 @@ class ParticipanteService
     {
         $old_participante = clone $participante;
 
-        // cargar logo
-        if (isset($datos["logo"]) && !is_string($datos["logo"])) {
-            $this->cargarLogo($participante, $datos["logo"]);
-        }
+        $participante->update([
+            "nombre" => mb_strtoupper($datos["nombre"]),
+            "correo" => mb_strtolower($datos["correo"]),
+            "descripcion" => mb_strtoupper($datos["descripcion"]) ?? NULL,
+        ]);
 
         // registrar accion
         $this->historialAccionService->registrarAccion($this->modulo, "MODIFICACIÓN", "ACTUALIZÓ UN PARTICIPANTE", $old_participante, $participante->withoutRelations());

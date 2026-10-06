@@ -24,13 +24,13 @@ onMounted(() => {
 });
 </script>
 <template>
-    <Head title="Editar Pago"></Head>
+    <Head title="Distribuir Gastos de Pago"></Head>
     <Content>
         <template #header>
             <div class="row">
                 <div class="col-sm-6">
                     <h3 class="m-0">
-                        <i class="fa fa-list-alt"></i> Editar Pago
+                        <i class="fa fa-table"></i> Distribuir Gastos de Pago
                     </h3>
                 </div>
                 <!-- /.col -->
@@ -42,7 +42,9 @@ onMounted(() => {
                         <li class="breadcrumb-item">
                             <Link :href="route('pagos.index')">Pagos</Link>
                         </li>
-                        <li class="breadcrumb-item active">Editar Pago</li>
+                        <li class="breadcrumb-item active">
+                            Distribuir Gastos de Pago
+                        </li>
                     </ol>
                 </div>
                 <!-- /.col -->
@@ -50,11 +52,27 @@ onMounted(() => {
             <!-- /.row -->
         </template>
         <div class="row">
-            <div class="col-md-12">
-                <Formulario
-                    :form="form"
-                    @envio-formulario="limpiarPago"
-                ></Formulario>
+            <div class="col-12">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>PARTICIPANTE</th>
+                            <th>GASTO</th>
+                            <th>%</th>
+                            <th>MONTO</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="item in form.pago_gastos">
+                            <td>{{ item.id }}</td>
+                            <td>{{ item.participante.nombre }}</td>
+                            <td>{{ item.gasto.nombre }}</td>
+                            <td>{{ item.porcentaje_pago }}</td>
+                            <td>{{ item.monto_pagado }}</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </Content>

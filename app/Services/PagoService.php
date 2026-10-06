@@ -6,6 +6,7 @@ use App\Models\CampeonatoInscripcion;
 use App\Models\PagoPago;
 use App\Services\HistorialAccionService;
 use App\Models\Pago;
+use App\Models\PagoGasto;
 use App\Models\Producto;
 use App\Models\User;
 use Illuminate\Http\UploadedFile;
@@ -112,12 +113,78 @@ class PagoService
     public function crear(array $datos): Pago
     {
         $pago = Pago::create([
-            "nombre" => mb_strtoupper($datos["nombre"]),
-            "descripcion" => mb_strtoupper($datos["descripcion"]) ?? NULL,
+            "mes" => $datos["mes"],
+            "anio" => $datos["anio"],
+            "total" => $datos["total"],
+            "fecha_registro" => date("Y-m-d")
         ]);
 
+        foreach ($datos["pago_detalles"] as $item) {
+            $datos_item = [
+                "gasto_id" => $item["gasto_id"],
+                "monto" => $item["monto"],
+                "fecha" => $item["fecha"] ?? null,
+            ];
+
+            $pago->pago_detalles()->create($datos_item);
+        }
+
+        foreach ($datos["pago_participantes"] as $item) {
+            $datos_item = [
+                "participante_id" => $item["participante_id"],
+            ];
+
+            $pago->pago_participantes()->create($datos_item);
+        }
+
         // registrar accion
-        $this->historialAccionService->registrarAccion($this->modulo, "CREACIÓN", "REGISTRO UN PAGO", $pago);
+        $this->historialAccionService->registrarAccion($this->modulo, "CREACIÓN", "REGISTRO UN PAGO", $pago, null, ["pago_detalles", "pago_participantes"]);
+
+        return $pago;
+    }
+
+    public function distribuir(Pago $pago): Pago
+    {
+        $old_pago = clone $pago;
+
+        $total_participantes = $pago->pago_participantes->count();
+
+
+        // porcentaje %
+        $porcentaje = 100 / $total_participantes;
+        $porcentaje = round($porcentaje, 2);
+        foreach ($pago->pago_participantes as $item_participante) {
+            $total_pagado_participante = 0;
+            foreach ($pago->pago_detalles as $item_detalle) {
+                $existe = PagoGasto::where("pago_id", $pago->id)
+                    ->where("participante_id", $item_participante->participante_id)
+                    ->where("pago_participante_id", $item_participante->id)
+                    ->where("pago_detalle_id", $item_detalle->gasto_id)
+                    ->where("gasto_id", $item_detalle->gasto_id)
+                    ->get()->first();
+
+                if ($existe) continue;
+                // monto_pagado 
+                $monto_pagado = (float)$item_detalle->monto * ($porcentaje / 100);
+                $monto_pagado = round($monto_pagado, 2);
+
+                $pago->pago_gastos()->create([
+                    "pago_detalle_id" => $item_detalle->id,
+                    "participante_id" => $item_participante->participante_id,
+                    "pago_participante_id" => $item_participante->id,
+                    "gasto_id" => $item_detalle->gasto_id,
+                    "porcentaje_pago" => $porcentaje,
+                    "monto_pagado" => $monto_pagado,
+                ]);
+
+                $total_pagado_participante += (float)$monto_pagado;
+            }
+            $item_participante->total = $total_pagado_participante;
+            $item_participante->save();
+        }
+
+        // registrar accion
+        $this->historialAccionService->registrarAccion($this->modulo, "MODIFICACIÓN", "DISTRIBUYO UN PAGO", $old_pago, $pago->withoutRelations());
 
         return $pago;
     }

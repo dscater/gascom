@@ -53,6 +53,7 @@ class PermisoService
             "pagos.show",
             "pagos.update",
             "pagos.destroy",
+            "pagos.distribuir",
 
             "reportes.usuarios",
             "reportes.r_usuarios",

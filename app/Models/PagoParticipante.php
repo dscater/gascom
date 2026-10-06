@@ -8,10 +8,19 @@ class PagoParticipante extends Model
 {
     protected $fillable = [
         "pago_id",
-        "gasto_id",
-        "pago_detalle_id",
         "participante_id",
-        "monto",
-        "porcentaje",
+        "correo_enviado",
+        "total",
+        "estado" // PENDIENTE, PAGADO
     ];
+
+    public function pago()
+    {
+        return $this->belongsTo(Pago::class, 'pago_id');
+    }
+
+    public function participante()
+    {
+        return $this->belongsTo(Participante::class, 'participante_id');
+    }
 }

@@ -27,48 +27,33 @@ const miTable = ref(null);
 const headers = [
     {
         label: "Código",
-        key: "codigo_pago",
+        key: "id",
         sortable: true,
         width: "4%",
     },
     {
-        label: "ALMACÉN-SUCURSAL",
-        key: "ubicacion",
+        label: "MES",
+        key: "mes",
         sortable: true,
     },
     {
-        label: "CLIENTE",
-        key: "cliente",
+        label: "AÑO",
+        key: "anio",
         sortable: true,
     },
     {
-        label: "TOTAL BS.",
+        label: "TOTAL",
         key: "total",
         sortable: true,
     },
     {
-        label: "TIPO DE VENTA",
-        key: "tipo_pago",
-        sortable: true,
-    },
-    {
-        label: "TIPO DE PAGO",
-        key: "tipo_pago",
-        sortable: true,
-    },
-    {
-        label: "SALDO BS.",
-        key: "saldo",
+        label: "ESTADO",
+        key: "estado",
         sortable: true,
     },
     {
         label: "FECHA REGISTRO",
         key: "fecha_registro",
-        sortable: true,
-    },
-    {
-        label: "RESPONSABLE",
-        key: "user",
         sortable: true,
     },
     {
@@ -236,90 +221,31 @@ const eliminarPago = (item) => {
                                     item.total
                                 }}</span>
                             </template>
-                            <template #user="{ item }">
-                                <span class=""
-                                    >{{ item.user?.nombre }}
-                                    {{ item.user?.paterno }}
-                                    {{ item.user?.materno }}</span
-                                >
-                            </template>
                             <template #accion="{ item }">
                                 <template
                                     v-if="
                                         props_page.auth?.user.permisos == '*' ||
                                         props_page.auth?.user.permisos.includes(
-                                            'pagos.index',
+                                            'pagos.distribuir',
                                         )
                                     "
                                 >
                                     <el-tooltip
                                         class="box-item"
                                         effect="dark"
-                                        content="Pdf Rollo"
+                                        content="Distribuir Gastos"
                                         placement="left-start"
                                     >
-                                        <a
-                                            class="btn btn-info"
-                                            :href="
-                                                route(
-                                                    'pagos.pdf_rollo',
-                                                    item.id,
-                                                )
-                                            "
-                                            target="_blank"
-                                        >
-                                            <i class="fa fa-file-pdf"></i></a
-                                    ></el-tooltip>
-                                </template>
-                                <template
-                                    v-if="
-                                        props_page.auth?.user.permisos == '*' ||
-                                        props_page.auth?.user.permisos.includes(
-                                            'pagos.index',
-                                        )
-                                    "
-                                >
-                                    <el-tooltip
-                                        class="box-item"
-                                        effect="dark"
-                                        content="Pdf Carta"
-                                        placement="left-start"
-                                    >
-                                        <a
+                                        <Link
                                             class="btn btn-primary"
-                                            :href="route('pagos.pdf', item.id)"
-                                            target="_blank"
-                                        >
-                                            <i class="fa fa-file-pdf"></i></a
-                                    ></el-tooltip>
-                                </template>
-                                <template
-                                    v-if="
-                                        item.tipo_pago == 'CRÉDITO' &&
-                                        (props_page.auth?.user.permisos ==
-                                            '*' ||
-                                            props_page.auth?.user.permisos.includes(
-                                                'pagos.cobros',
-                                            ))
-                                    "
-                                >
-                                    <el-tooltip
-                                        class="box-item"
-                                        effect="dark"
-                                        content="Pdf Cobros"
-                                        placement="left-start"
-                                    >
-                                        <a
-                                            class="btn btn-default bgPrecargado"
                                             :href="
                                                 route(
-                                                    'pagos.pdf_cobros',
+                                                    'pagos.distribuir',
                                                     item.id,
                                                 )
                                             "
-                                            target="_blank"
                                         >
-                                            <i class="fa fa-file-pdf"></i></a
+                                            <i class="fa fa-table"></i></Link
                                     ></el-tooltip>
                                 </template>
                                 <template

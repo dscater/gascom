@@ -23,7 +23,8 @@ class ParticipanteStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "nombre" => "required|string|unique:gastos,nombre",
+            "nombre" => "required|string|unique:participantes,nombre",
+            "correo" => "required|string|unique:participantes,correo",
             "descripcion" => "nullable|string",
         ];
     }
@@ -34,6 +35,9 @@ class ParticipanteStoreRequest extends FormRequest
             "nombre.required" => "Debes completar este campo",
             "nombre.string" => "Debes ingresar un texto valido",
             "nombre.unique" => "Este nombre ya fue registrado",
+            "correo.required" => "Debes completar este campo",
+            "correo.string" => "Debes ingresar un texto valido",
+            "correo.unique" => "Este correo ya fue registrado",
             "descripcion.string" => "Debes ingresar un texto valido"
         ];
     }

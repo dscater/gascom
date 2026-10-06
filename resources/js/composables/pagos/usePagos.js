@@ -7,6 +7,9 @@ export const usePagos = () => {
         anio: "",
         total: "",
         pago_detalles: [],
+        pago_participantes: [],
+        eliminados_detalles: [],
+        eliminados_participantes: [],
         _method: "POST",
     };
 

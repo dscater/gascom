@@ -145,10 +145,10 @@ onUnmounted(() => {});
                     ></ItemMenu>
                     <ItemMenu
                         v-if="
-                            permisos == '*' || permisos.includes('pagos.create')
+                            permisos == '*' || permisos.includes('pagos.index')
                         "
                         :label="'Pagos'"
-                        :ruta="'pagos.create'"
+                        :ruta="'pagos.index'"
                         :icon="'fa fa-table'"
                     ></ItemMenu>
                     <ItemMenu

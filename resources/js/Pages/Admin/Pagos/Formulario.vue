@@ -135,6 +135,56 @@ const enviarFormulario = () => {
 
 const emits = defineEmits(["envio-formulario"]);
 
+const listMeses = ref([
+    {
+        value: "01",
+        label: "Enero",
+    },
+    {
+        value: "02",
+        label: "Febrero",
+    },
+    {
+        value: "03",
+        label: "Marzo",
+    },
+    {
+        value: "04",
+        label: "Abril",
+    },
+    {
+        value: "05",
+        label: "Mayo",
+    },
+    {
+        value: "06",
+        label: "Junio",
+    },
+    {
+        value: "07",
+        label: "Julio",
+    },
+    {
+        value: "08",
+        label: "Agosto",
+    },
+    {
+        value: "09",
+        label: "Septiembre",
+    },
+    {
+        value: "10",
+        label: "Octubre",
+    },
+    {
+        value: "11",
+        label: "Noviembre",
+    },
+    {
+        value: "12",
+        label: "Diciembre",
+    },
+]);
 const listParticipantes = ref([]);
 const listGastos = ref([]);
 
@@ -162,6 +212,50 @@ const cargarListas = () => {
     cargarParticipantes();
 };
 
+const agregarPagoDetalle = () => {
+    form.pago_detalles.push({
+        id: 0,
+        pago_id: 0,
+        gasto_id: "",
+        monto: 0,
+        fecha: "",
+    });
+};
+
+const agregarParticipante = () => {
+    form.pago_participantes.push({
+        id: 0,
+        pago_id: 0,
+        participante_id: "",
+    });
+};
+
+const quitarPagoDetalle = (item, index) => {
+    if (item.id != 0) {
+        form.eliminados_detalles.push(item.id);
+    }
+
+    form.pago_detalles.splice(index, 1);
+};
+
+const quitarPagoParticipante = (item, index) => {
+    if (item.id != 0) {
+        form.eliminados_participantes.push(item.id);
+    }
+
+    form.pago_participantes.splice(index, 1);
+};
+
+const totalPago = computed(() => {
+    return form.pago_detalles.reduce((acc, item) => {
+        return acc + parseFloat(item.monto ?? 0);
+    }, 0);
+});
+
+watch([totalPago], (newTotalPago) => {
+    form.total = parseFloat(newTotalPago);
+});
+
 onMounted(() => {
     cargarListas();
 });
@@ -170,113 +264,222 @@ onMounted(() => {
 <template>
     <form @submit.prevent="enviarFormulario()">
         <div class="row">
-            <div class="col-md-7">
+            <div class="col-12">
                 <div class="card">
-                    <div class="card-header shadow-bottom">
+                    <div class="card-header bg1">
+                        <h4 class="card-title text-white">
+                            <i class="fa fa-clipboard-list"></i> Datos del Pago
+                        </h4>
+                    </div>
+                    <div class="card-body">
                         <div class="row">
-                            <div class="col-12 mt-2">
-                                <div class="input-group">
-                                    <span class="input-group-text">
-                                        <i class="fa fa-warehouse"></i>
-                                    </span>
-                                    <div class="form-control border-0 p-0">
-                                        <el-select
-                                            v-model="participante_id"
-                                            class="el-select-input-group-right"
-                                            no-data-text="Sin datos"
-                                            no-match-text="Sin resultados"
-                                            placeholder="Seleccionar Almacén"
-                                            filterable
-                                        >
-                                            <el-option
-                                                v-for="item in listParticipantes"
-                                                :key="item.id"
-                                                :value="item.id"
-                                                :label="`${item.nombre}`"
-                                            ></el-option>
-                                        </el-select>
+                            <div class="col-md-4 form-group">
+                                <label class="required">Mes</label>
+                                <el-select
+                                    v-model="form.mes"
+                                    placeholder="Mes"
+                                    no-data-text="Sin datos"
+                                    no-match-text="Sin resultados"
+                                    filterable
+                                >
+                                    <el-option
+                                        v-for="item in listMeses"
+                                        :key="item.value"
+                                        :value="item.value"
+                                        :label="item.label"
+                                    ></el-option>
+                                </el-select>
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <label class="required">Año</label>
+                                <input
+                                    type="text"
+                                    v-model="form.anio"
+                                    class="form-control"
+                                    placeholder="Año"
+                                />
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <label class="required">Total</label>
+                                <input
+                                    type="number"
+                                    v-model="totalPago"
+                                    class="form-control"
+                                    placeholder="Total"
+                                    readonly
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mt-2">
+                    <div class="card-header bg1">
+                        <h4 class="card-title text-white">
+                            <i class="fa fa-table"></i> Detalles del pago
+                            <button
+                                type="button"
+                                class="btn btn-primary btn-sm fs-7"
+                                @click.prevent="agregarPagoDetalle"
+                            >
+                                <i class="fa fa-plus"></i> Agregar Detalle
+                            </button>
+                        </h4>
+                    </div>
+                    <div class="card-body bg-dark-gray">
+                        <div class="row">
+                            <div
+                                class="col-6"
+                                v-for="(item, index) in form.pago_detalles"
+                            >
+                                <div class="card mt-2">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <button
+                                                    type="button"
+                                                    class="btn btn-danger btn-sm fs-8"
+                                                    @click.prevent="
+                                                        quitarPagoDetalle(
+                                                            item,
+                                                            index,
+                                                        )
+                                                    "
+                                                >
+                                                    <i class="fa fa-times"></i>
+                                                </button>
+                                            </div>
+                                            <div class="col-md-4 form-group">
+                                                <label class="required"
+                                                    >Gasto</label
+                                                >
+                                                <el-select
+                                                    v-model="item.gasto_id"
+                                                    placeholder="Gasto"
+                                                    filterable
+                                                    no-data-text="Sin datos"
+                                                    no-match-text="Sin resultados"
+                                                >
+                                                    <el-option
+                                                        v-for="item in listGastos"
+                                                        :key="item.id"
+                                                        :value="item.id"
+                                                        :label="item.nombre"
+                                                    ></el-option
+                                                ></el-select>
+                                            </div>
+                                            <div class="col-md-4 form-group">
+                                                <label class="required"
+                                                    >Monto</label
+                                                >
+                                                <input
+                                                    type="number"
+                                                    v-model="item.monto"
+                                                    class="form-control"
+                                                    placeholder="Monto"
+                                                />
+                                            </div>
+                                            <div class="col-md-4 form-group">
+                                                <label>Fecha</label>
+                                                <input
+                                                    type="date"
+                                                    v-model="item.fecha"
+                                                    class="form-control"
+                                                    placeholder="Fecha"
+                                                />
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <ul
-                                    v-if="form.errors?.participante_id"
-                                    class="d-block text-danger list-unstyled"
-                                >
+                            </div>
+                            <div
+                                class="col-12"
+                                v-if="form.errors?.pago_detalles"
+                            >
+                                <ul class="d-block text-danger list-unstyled">
                                     <li class="parsley-required">
-                                        {{ form.errors?.participante_id }}
+                                        {{ form.errors?.pago_detalles }}
                                     </li>
                                 </ul>
                             </div>
                         </div>
                     </div>
-                    <div class="card-header">
-                        <div class="col-12">
-                            <h4 class="card-title text-center w-100">
-                                <i class="fa fa-truck-loading"></i> Agregar
-                                Productos
-                            </h4>
-                        </div>
+                </div>
+                <div class="card mt-2">
+                    <div class="card-header bg1">
+                        <h4 class="card-title text-white">
+                            <i class="fa fa-user-friends"></i> Participantes
+                            <button
+                                type="button"
+                                class="btn btn-primary btn-sm fs-7"
+                                @click.prevent="agregarParticipante"
+                            >
+                                <i class="fa fa-plus"></i> Agregar Participante
+                            </button>
+                        </h4>
                     </div>
-                    <div
-                        class="card-body bgGrayLight"
-                        style="max-height: 63vh; overflow: auto"
-                    >
-                        <div class="row" v-if="participante_id">
-                            <div class="col-12">
-                                <div class="vacio_info" v-if="loadingLista">
-                                    <i
-                                        class="fa fa-spin fa-spinner fs-1 text-primary"
-                                    ></i>
+                    <div class="card-body">
+                        <div class="row">
+                            <div
+                                class="col-sm-6 form-group"
+                                v-for="(item, index) in form.pago_participantes"
+                            >
+                                <label class="required">Participante</label>
+                                <div class="input-group">
+                                    <div class="form-control border-0 p-0">
+                                        <el-select
+                                            v-model="item.participante_id"
+                                            class="el-select-input-group-left"
+                                            size="large"
+                                            placeholder="Participante"
+                                            filterable
+                                            no-data-text="Sin datos"
+                                            no-match-text="Sin resultados"
+                                        >
+                                            <el-option
+                                                v-for="item in listParticipantes"
+                                                :key="item.id"
+                                                :value="item.id"
+                                                :label="item.nombre"
+                                            ></el-option
+                                        ></el-select>
+                                    </div>
+                                    <div class="input-group-text p-0">
+                                        <button
+                                            type="button"
+                                            class="btn btn-danger fs-8 rounded-0 h-100"
+                                            @click.prevent="
+                                                quitarPagoParticipante(
+                                                    item,
+                                                    index,
+                                                )
+                                            "
+                                        >
+                                            <i class="fa fa-times"></i>
+                                        </button>
+                                    </div>
                                 </div>
-                                <div class="row" v-if="!loadingLista"></div>
                             </div>
-                        </div>
-                        <div class="vacio_info text-muted py-5" v-else>
-                            <i class="fa fa-warehouse fs-1"></i>
-                            <div>Selecciona una participante</div>
+                            <div
+                                class="col-12"
+                                v-if="form.errors?.pago_participantes"
+                            >
+                                <ul class="d-block text-danger list-unstyled">
+                                    <li class="parsley-required">
+                                        {{ form.errors?.pago_participantes }}
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-5">
-                <div class="card">
-                    <div class="card-header bg-success text-white">
-                        <div class="row">
-                            <div class="col-12">
-                                <h4 class="card-title text-white pt-1">
-                                    <i class="fa fa-clipboard-check"></i> Datos
-                                    de la Pago
-                                    <span v-if="form.id != 0" class="fw-bold"
-                                        >- ACTUALIZACIÓN</span
-                                    >
-                                </h4>
-                                <div
-                                    class="float-end badge bgActivo rounded-circle fs-6"
-                                >
-                                    {{ form.pago_detalles.length }}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <div class="row">
-                            <div class="col-12">
-                                <button
-                                    type="button"
-                                    class="btn btn-primary btn-sm w-100"
-                                    :disabled="enviando"
-                                    @click.prevent="enviarFormulario"
-                                    v-html="textBtn"
-                                ></button>
-                                <button
-                                    type="button"
-                                    class="btn btn-default btn-sm w-100 mt-2 border"
-                                    @click="cancelarPago"
-                                    v-html="txtBtnCancelar"
-                                ></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="col-12 mt-2">
+                <button
+                    class="btn btn-primary float-end btn-lg"
+                    :disabled="enviando"
+                    @click="enviarFormulario"
+                    v-html="textBtn"
+                ></button>
             </div>
         </div>
     </form>
