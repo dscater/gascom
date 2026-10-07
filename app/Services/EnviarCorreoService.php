@@ -51,9 +51,6 @@ class EnviarCorreoService
      */
     public function mailDistribucionPagos(Pago $pago): void
     {
-
-        $mensaje = "PRUEBA";
-
         $meses = [
             "01" => "Enero",
             "02" => "Febrero",
@@ -69,30 +66,42 @@ class EnviarCorreoService
             "12" => "Diciembre",
         ];
 
-        $matriz = $pago->pago_detalles->map(function ($detalle) use ($pago) {
+        // Indexamos los gastos para no hacer first() repetidamente
+        $gastosIndexados = $pago->pago_gastos->keyBy(function ($gasto) {
+            return $gasto->pago_detalle_id . '_' . $gasto->pago_participante_id;
+        });
+
+        // Construimos la matriz
+        $matriz = $pago->pago_detalles->map(function ($detalle) use (
+            $pago,
+            $gastosIndexados
+        ) {
 
             return [
                 'detalle' => $detalle,
 
-                'participantes' => $pago->pago_participantes->map(function ($participante) use ($detalle, $pago) {
+                'participantes' => $pago->pago_participantes->map(
+                    function ($participante) use (
+                        $detalle,
+                        $gastosIndexados
+                    ) {
 
-                    $gasto = $pago->pago_gastos
-                        ->first(function ($item) use ($detalle, $participante) {
-                            return $item->pago_detalle_id == $detalle->id
-                                && $item->pago_participante_id == $participante->id;
-                        });
+                        $key = $detalle->id . '_' . $participante->id;
 
-                    return [
-                        'participante' => $participante,
-                        'gasto' => $gasto,
-                    ];
-                }),
+                        return [
+                            'participante' => $participante,
+                            'gasto' => $gastosIndexados->get($key),
+                        ];
+                    }
+                ),
             ];
         });
 
+        // Totales por participante
         $totalesParticipantes = [];
 
         foreach ($pago->pago_participantes as $participante) {
+
             $totalesParticipantes[$participante->id] = $pago->pago_gastos
                 ->where('pago_participante_id', $participante->id)
                 ->sum('monto_pagado');
@@ -100,24 +109,30 @@ class EnviarCorreoService
 
         $totalGeneral = array_sum($totalesParticipantes);
 
-        $datos = [
-            "mensaje" => $mensaje,
-            "meses" => $meses,
-            "mes" => $pago->mes,
-            "anio" => $pago->anio,
-            "pago" => $pago,
-            "matriz" => $matriz,
-            "totales_participantes" => $totalesParticipantes,
-            "total_general" => $totalGeneral,
-        ];
+        // Enviar correo individual
+        foreach ($pago->pago_participantes as $pagoParticipante) {
 
-        foreach ($pago->pago_participantes as $participante) {
-            // Log::debug($participante->participante->correo);
+            $totalParticipante =
+                $totalesParticipantes[$pagoParticipante->id] ?? 0;
 
-            Mail::to($participante->participante->correo)
+            $datos = [
+                "meses" => $meses,
+                "mes" => $pago->mes,
+                "anio" => $pago->anio,
+
+                "pago" => $pago,
+                "matriz" => $matriz,
+
+                "totales_participantes" => $totalesParticipantes,
+                "total_general" => $totalGeneral,
+
+                // Información específica del participante
+                "pago_participante" => $pagoParticipante,
+                "total_participante" => $totalParticipante,
+            ];
+
+            Mail::to($pagoParticipante->participante->correo)
                 ->send(new DistribucionPagoMail($datos));
         }
-
-        // EnviaCodigoerificacionJob::dispatch($datos, $user);
     }
 }
