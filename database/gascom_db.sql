@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 07-10-2026 a las 15:52:51
+-- Tiempo de generación: 07-10-2026 a las 18:30:39
 -- Versión del servidor: 8.0.30
 -- Versión de PHP: 8.2.22
 
@@ -123,7 +123,8 @@ INSERT INTO `historial_accions` (`id`, `user_id`, `accion`, `descripcion`, `dato
 (21, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN PARTICIPANTE GASTO', '{\"id\": 12, \"gasto_id\": \"4\", \"created_at\": \"2026-10-07T14:39:13.000000Z\", \"porcentaje\": \"30\", \"updated_at\": \"2026-10-07T14:39:13.000000Z\", \"participante_id\": \"3\"}', NULL, 'PARTICIPANTE GASTOS', '2026-10-07', '10:39:13', '2026-10-07 14:39:13', '2026-10-07 14:39:13'),
 (22, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN PARTICIPANTE GASTO', '{\"id\": 13, \"gasto_id\": \"5\", \"created_at\": \"2026-10-07T14:39:39.000000Z\", \"porcentaje\": \"0\", \"updated_at\": \"2026-10-07T14:39:39.000000Z\", \"participante_id\": \"3\"}', NULL, 'PARTICIPANTE GASTOS', '2026-10-07', '10:39:39', '2026-10-07 14:39:39', '2026-10-07 14:39:39'),
 (23, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN PARTICIPANTE GASTO', '{\"id\": 14, \"gasto_id\": \"3\", \"created_at\": \"2026-10-07T14:39:48.000000Z\", \"porcentaje\": \"50\", \"updated_at\": \"2026-10-07T14:39:48.000000Z\", \"participante_id\": \"3\"}', NULL, 'PARTICIPANTE GASTOS', '2026-10-07', '10:39:48', '2026-10-07 14:39:48', '2026-10-07 14:39:48'),
-(24, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN PARTICIPANTE GASTO', '{\"id\": 15, \"gasto_id\": \"3\", \"created_at\": \"2026-10-07T14:43:06.000000Z\", \"porcentaje\": \"0\", \"updated_at\": \"2026-10-07T14:43:06.000000Z\", \"participante_id\": \"2\"}', NULL, 'PARTICIPANTE GASTOS', '2026-10-07', '10:43:06', '2026-10-07 14:43:06', '2026-10-07 14:43:06');
+(24, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN PARTICIPANTE GASTO', '{\"id\": 15, \"gasto_id\": \"3\", \"created_at\": \"2026-10-07T14:43:06.000000Z\", \"porcentaje\": \"0\", \"updated_at\": \"2026-10-07T14:43:06.000000Z\", \"participante_id\": \"2\"}', NULL, 'PARTICIPANTE GASTOS', '2026-10-07', '10:43:06', '2026-10-07 14:43:06', '2026-10-07 14:43:06'),
+(25, 1, 'MODIFICACIÓN', 'EL USUARIO admin ACTUALIZÓ UN PARTICIPANTE', '{\"id\": 1, \"correo\": \"juanpablo@gmail.com\", \"nombre\": \"JUAN PABLO\", \"created_at\": \"2026-10-06T15:02:20.000000Z\", \"updated_at\": \"2026-10-06T15:02:20.000000Z\", \"descripcion\": \"\"}', '{\"id\": 1, \"correo\": \"juanpablochurac@gmail.com\", \"nombre\": \"JUAN PABLO\", \"created_at\": \"2026-10-06T15:02:20.000000Z\", \"updated_at\": \"2026-10-07T18:26:58.000000Z\", \"descripcion\": \"\"}', 'PARTICIPANTES', '2026-10-07', '14:26:58', '2026-10-07 18:26:59', '2026-10-07 18:26:59');
 
 -- --------------------------------------------------------
 
@@ -267,9 +268,9 @@ CREATE TABLE `pago_participantes` (
 --
 
 INSERT INTO `pago_participantes` (`id`, `pago_id`, `participante_id`, `correo_enviado`, `total`, `estado`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, 0, 162.80, 'PENDIENTE', '2026-10-06 15:30:39', '2026-10-07 15:51:27'),
-(2, 1, 2, 0, 58.04, 'PENDIENTE', '2026-10-06 15:30:39', '2026-10-07 15:51:27'),
-(3, 1, 3, 0, 133.36, 'PENDIENTE', '2026-10-06 15:30:39', '2026-10-07 15:51:27');
+(1, 1, 1, 0, 0.00, 'PENDIENTE', '2026-10-06 15:30:39', '2026-10-07 18:29:38'),
+(2, 1, 2, 0, 0.00, 'PENDIENTE', '2026-10-06 15:30:39', '2026-10-07 18:29:38'),
+(3, 1, 3, 0, 0.00, 'PENDIENTE', '2026-10-06 15:30:39', '2026-10-07 18:29:38');
 
 -- --------------------------------------------------------
 
@@ -291,7 +292,7 @@ CREATE TABLE `participantes` (
 --
 
 INSERT INTO `participantes` (`id`, `nombre`, `correo`, `descripcion`, `created_at`, `updated_at`) VALUES
-(1, 'JUAN PABLO', 'juanpablo@gmail.com', '', '2026-10-06 15:02:20', '2026-10-06 15:02:20'),
+(1, 'JUAN PABLO', 'juanpablochurac@gmail.com', '', '2026-10-06 15:02:20', '2026-10-07 18:26:58'),
 (2, 'EDWIN', 'edwin@gmail.com', '', '2026-10-06 15:02:30', '2026-10-06 15:02:30'),
 (3, 'GONZALO', 'victorgonzalo.as@gmail.com', '', '2026-10-06 15:02:43', '2026-10-06 15:02:43');
 
@@ -470,7 +471,7 @@ ALTER TABLE `gastos`
 -- AUTO_INCREMENT de la tabla `historial_accions`
 --
 ALTER TABLE `historial_accions`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT de la tabla `migrations`
