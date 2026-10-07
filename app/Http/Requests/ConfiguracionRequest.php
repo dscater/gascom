@@ -31,6 +31,7 @@ class ConfiguracionRequest extends FormRequest
             "actividad" => "nullable",
             "correo" => "nullable",
             "logo" => "required",
+            "qr" => "required",
         ];
     }
 
@@ -46,6 +47,7 @@ class ConfiguracionRequest extends FormRequest
             "alias.required" => "Debes completar este campo",
             "razon_social.required" => "Debes completar este campo",
             "logo.required" => "Debes completar este campo",
+            "qr.required" => "Debes completar este campo",
             "fono.required" => "Debes completar este campo",
             "dir.required" => "Debes completar este campo",
         ];

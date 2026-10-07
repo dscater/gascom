@@ -6,6 +6,7 @@ export const useConfiguracionStore = defineStore("configuracion", {
             sistema: "SVT",
             alias: "SVT",
             url_logo: "",
+            url_qr: "",
         },
     }),
     actions: {

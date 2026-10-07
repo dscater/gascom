@@ -5,6 +5,7 @@ use App\Http\Controllers\GastoController;
 use App\Http\Controllers\InicioController;
 use App\Http\Controllers\PagoController;
 use App\Http\Controllers\ParticipanteController;
+use App\Http\Controllers\ParticipanteGastoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReporteController;
 use App\Http\Controllers\UserController;
@@ -88,10 +89,19 @@ Route::middleware(['auth', 'permisoUsuario'])->prefix("admin")->group(function (
         ["index", "store", "edit", "show", "update", "destroy"]
     );
 
+    // PARTICIPANTE GASTOS
+    Route::get("participante_gastos/paginado", [ParticipanteGastoController::class, 'paginado'])->name("participante_gastos.paginado");
+    Route::get("participante_gastos/listado", [ParticipanteGastoController::class, 'listado'])->name("participante_gastos.listado");
+    Route::patch("participante_gastos/finalizar/{campeonato}", [ParticipanteGastoController::class, 'finalizar'])->name("participante_gastos.finalizar");
+    Route::resource("participante_gastos", ParticipanteGastoController::class)->only(
+        ["index", "store", "edit", "show", "update", "destroy"]
+    );
+
     // PAGOS
     Route::get("pagos/paginado", [PagoController::class, 'paginado'])->name("pagos.paginado");
     Route::get("pagos/listado", [PagoController::class, 'listado'])->name("pagos.listado");
     Route::get("pagos/distribuir/{pago}", [PagoController::class, 'distribuir'])->name("pagos.distribuir");
+    Route::put("pagos/guardar_distribuir/{pago}", [PagoController::class, 'guardar_distribuir'])->name("pagos.guardar_distribuir");
     Route::resource("pagos", PagoController::class)->only(
         ["index", "create", "store", "edit", "show", "update", "destroy"]
     );

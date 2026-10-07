@@ -42,6 +42,8 @@ if (props_page.configuracion != null) {
         correo: "",
         url_logo: "",
         logo: "",
+        url_qr: "",
+        qr: "",
     });
 }
 
@@ -88,6 +90,7 @@ const enviarFormulario = () => {
     });
 };
 const logo = ref(null);
+const qr = ref(null);
 function cargaArchivo(e, key) {
     form[key] = null;
     form[key] = e.target.files[0];
@@ -245,6 +248,26 @@ onMounted(() => {
                     </div>
                     <span class="text-danger" v-if="form.errors?.logo">{{
                         form.errors.logo
+                    }}</span>
+                </div>
+                <div class="col-md-4 form-group mb-3">
+                    <label class="required">QR</label>
+                    <input
+                        type="file"
+                        class="form-control"
+                        @change="cargaArchivo($event, 'qr')"
+                        ref="qr"
+                    />
+                    <div class="logo_muestra w-100 text-center">
+                        <img
+                            :src="form.url_qr"
+                            alt=""
+                            v-if="form.url_qr"
+                            width="50%"
+                        />
+                    </div>
+                    <span class="text-danger" v-if="form.errors?.qr">{{
+                        form.errors.qr
                     }}</span>
                 </div>
             </div>

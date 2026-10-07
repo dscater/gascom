@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PagoGuardarDistribuirRequest;
 use App\Http\Requests\PagoStoreRequest;
 use App\Http\Requests\PagoUpdateRequest;
 use App\Models\Pago;
@@ -127,7 +128,7 @@ class PagoController extends Controller
     {
 
         $this->pagoService->distribuir($pago);
-        $pago = $pago->load(["pago_detalles", "pago_participantes", "pago_gastos.participante", "pago_gastos.gasto"]);
+        $pago = $pago->load(["pago_detalles.gasto", "pago_participantes.participante", "pago_gastos.participante", "pago_gastos.gasto"]);
 
         return Inertia::render("Admin/Pagos/Distribuir", compact("pago"));
     }
@@ -139,6 +140,23 @@ class PagoController extends Controller
         try {
             // actualizar pago
             $this->pagoService->actualizar($request->validated(), $pago);
+            DB::commit();
+            return redirect()->route("pagos.index")->with("bien", "Registro actualizado");
+        } catch (\Exception $e) {
+            DB::rollBack();
+            // Log::debug($e->getMessage());
+            throw ValidationException::withMessages([
+                'error' =>  $e->getMessage(),
+            ]);
+        }
+    }
+
+    public function guardar_distribuir(Pago $pago, PagoGuardarDistribuirRequest $request)
+    {
+        DB::beginTransaction();
+        try {
+            // actualizar pago
+            $this->pagoService->guardar_distribuir($request->validated(), $pago);
             DB::commit();
             return redirect()->route("pagos.index")->with("bien", "Registro actualizado");
         } catch (\Exception $e) {

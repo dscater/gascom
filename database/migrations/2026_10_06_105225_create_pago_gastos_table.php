@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger("participante_id");
             $table->unsignedBigInteger("pago_participante_id");
             $table->unsignedBigInteger("gasto_id");
-            $table->double("porcentaje_pago", 8, 2)->default(0);
+            $table->double("porcentaje_pago", 11, 8)->default(0);
             $table->decimal("monto_pagado", 24, 2)->default(0);
             $table->string("estado")->default("PENDIENTE"); // PENDIENTE, PAGADO
             $table->timestamps();

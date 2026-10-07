@@ -6,7 +6,10 @@ use App\Models\CampeonatoInscripcion;
 use App\Models\PagoPago;
 use App\Services\HistorialAccionService;
 use App\Models\Pago;
+use App\Models\PagoDetalle;
 use App\Models\PagoGasto;
+use App\Models\PagoParticipante;
+use App\Models\ParticipanteGasto;
 use App\Models\Producto;
 use App\Models\User;
 use Illuminate\Http\UploadedFile;
@@ -21,7 +24,7 @@ class PagoService
 {
     private $modulo = "PAGOS";
 
-    public function __construct(private  CargarArchivoService $cargarArchivoService, private HistorialAccionService $historialAccionService) {}
+    public function __construct(private  CargarArchivoService $cargarArchivoService, private HistorialAccionService $historialAccionService, private EnviarCorreoService $enviar_correo_service) {}
 
     public function listado(
         $campeonato_id = null,
@@ -149,10 +152,9 @@ class PagoService
 
         $total_participantes = $pago->pago_participantes->count();
 
-
         // porcentaje %
         $porcentaje = 100 / $total_participantes;
-        $porcentaje = round($porcentaje, 2);
+        $porcentaje = round($porcentaje, 8);
         foreach ($pago->pago_participantes as $item_participante) {
             $total_pagado_participante = 0;
             foreach ($pago->pago_detalles as $item_detalle) {
@@ -165,8 +167,19 @@ class PagoService
 
                 if ($existe) continue;
                 // monto_pagado 
-                $monto_pagado = (float)$item_detalle->monto * ($porcentaje / 100);
-                $monto_pagado = round($monto_pagado, 2);
+                $participante_gasto = ParticipanteGasto::where("participante_id", $item_participante->participante_id)
+                    ->where("gasto_id", $item_detalle->gasto_id)
+                    ->get()->first();
+                if ($participante_gasto) {
+                    // con porcentaje asignado
+                    $porcentaje = $participante_gasto->porcentaje;
+                    $monto_pagado = (float)$item_detalle->monto * ($porcentaje / 100);
+                    $monto_pagado = round($monto_pagado, 2);
+                } else {
+                    // sin porcentaje asignado
+                    $monto_pagado = (float)$item_detalle->monto * ($porcentaje / 100);
+                    $monto_pagado = round($monto_pagado, 2);
+                }
 
                 $pago->pago_gastos()->create([
                     "pago_detalle_id" => $item_detalle->id,
@@ -200,13 +213,112 @@ class PagoService
     {
         $old_pago = clone $pago;
 
-        // cargar logo
-        if (isset($datos["logo"]) && !is_string($datos["logo"])) {
-            $this->cargarLogo($pago, $datos["logo"]);
+        $old_pago = clone $pago;
+
+        $total_participantes = $pago->pago_participantes->count();
+
+        // porcentaje %
+        $porcentaje = 100 / $total_participantes;
+        $porcentaje = round($porcentaje, 8);
+        foreach ($pago->pago_participantes as $item_participante) {
+            $total_pagado_participante = 0;
+            foreach ($pago->pago_detalles as $item_detalle) {
+                $existe = PagoGasto::where("pago_id", $pago->id)
+                    ->where("participante_id", $item_participante->participante_id)
+                    ->where("pago_participante_id", $item_participante->id)
+                    ->where("pago_detalle_id", $item_detalle->gasto_id)
+                    ->where("gasto_id", $item_detalle->gasto_id)
+                    ->get()->first();
+
+                // monto_pagado 
+                $participante_gasto = ParticipanteGasto::where("participante_id", $item_participante->participante_id)
+                    ->where("gasto_id", $item_detalle->gasto_id)
+                    ->get()->first();
+                if ($participante_gasto) {
+                    // con porcentaje asignado
+                    $porcentaje = $participante_gasto->porcentaje;
+                    $monto_pagado = (float)$item_detalle->monto * ($porcentaje / 100);
+                    $monto_pagado = round($monto_pagado, 2);
+                } else {
+                    // sin porcentaje asignado
+                    $monto_pagado = (float)$item_detalle->monto * ($porcentaje / 100);
+                    $monto_pagado = round($monto_pagado, 2);
+                }
+
+                if ($existe) {
+                    $existe->update([
+                        "pago_detalle_id" => $item_detalle->id,
+                        "participante_id" => $item_participante->participante_id,
+                        "pago_participante_id" => $item_participante->id,
+                        "gasto_id" => $item_detalle->gasto_id,
+                        "porcentaje_pago" => $porcentaje,
+                        "monto_pagado" => $monto_pagado,
+                    ]);
+                } else {
+                    $pago->pago_gastos()->create([
+                        "pago_detalle_id" => $item_detalle->id,
+                        "participante_id" => $item_participante->participante_id,
+                        "pago_participante_id" => $item_participante->id,
+                        "gasto_id" => $item_detalle->gasto_id,
+                        "porcentaje_pago" => $porcentaje,
+                        "monto_pagado" => $monto_pagado,
+                    ]);
+                }
+                $total_pagado_participante += (float)$monto_pagado;
+            }
+            $item_participante->total = $total_pagado_participante;
+            $item_participante->save();
+        }
+
+        if (isset($eliminados_detalles)) {
+            foreach ($eliminados_detalles as $item_id) {
+                $pago_detalle = PagoDetalle::findOrFail($item_id);
+                $pago_detalle->delete();
+            }
+        }
+
+        if (isset($eliminados_participantes)) {
+            foreach ($eliminados_participantes as $item_id) {
+                $pago_participante = PagoParticipante::findOrFail($item_id);
+                $pago_participante->delete();
+            }
         }
 
         // registrar accion
         $this->historialAccionService->registrarAccion($this->modulo, "MODIFICACIÓN", "ACTUALIZÓ UN PAGO", $old_pago, $pago->withoutRelations());
+
+        return $pago;
+    }
+
+    public function guardar_distribuir(array $datos, Pago $pago)
+    {
+        $old_pago = clone $pago;
+
+        $total_participantes = [];
+        foreach ($datos["matrizGastos"] as $item_detalle) {
+            foreach ($item_detalle["participantes"] as $item_participante) {
+                $pago_gasto = PagoGasto::findOrFail($item_participante["gasto"]["id"]);
+                $pago_gasto->update([
+                    "porcentaje_pago" => $item_participante["gasto"]["porcentaje_pago"],
+                    "monto_pagado" => $item_participante["gasto"]["monto_pagado"],
+                ]);
+
+                if (!isset($total_participantes[$item_participante["participante"]["participante_id"]])) {
+                    $total_participantes[$item_participante["participante"]["participante_id"]] = 0;
+                }
+                $total_participantes[$item_participante["participante"]["participante_id"]] += (float)$item_participante["gasto"]["monto_pagado"];
+            }
+        }
+
+        foreach ($pago->pago_participantes as $participante) {
+            $participante->total = $total_participantes[$participante->id];
+            $participante->save();
+        }
+
+        $this->enviar_correo_service->mailDistribucionPagos($pago);
+
+        // registrar accion
+        $this->historialAccionService->registrarAccion($this->modulo, "MODIFICACIÓN", "GUARDO Y DISTRIBUYÓ UN PAGO", $old_pago, $pago->withoutRelations());
 
         return $pago;
     }

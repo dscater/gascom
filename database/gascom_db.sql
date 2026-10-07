@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 06-10-2026 a las 16:03:44
+-- Tiempo de generación: 07-10-2026 a las 15:52:51
 -- Versión del servidor: 8.0.30
 -- Versión de PHP: 8.2.22
 
@@ -38,6 +38,7 @@ CREATE TABLE `configuracions` (
   `actividad` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `correo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `logo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `qr` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -46,8 +47,8 @@ CREATE TABLE `configuracions` (
 -- Volcado de datos para la tabla `configuracions`
 --
 
-INSERT INTO `configuracions` (`id`, `nombre_sistema`, `alias`, `razon_social`, `nit`, `dir`, `fono`, `actividad`, `correo`, `logo`, `created_at`, `updated_at`) VALUES
-(1, 'LUDESA', 'LD', 'LUDESA S.A.', '1111111111', 'LOS OLIVOS #111', '67676767', 'ACTIVIDAD', 'correo@gmail.com', '11787767543.png', '2026-02-16 22:21:27', '2026-08-26 18:08:27');
+INSERT INTO `configuracions` (`id`, `nombre_sistema`, `alias`, `razon_social`, `nit`, `dir`, `fono`, `actividad`, `correo`, `logo`, `qr`, `created_at`, `updated_at`) VALUES
+(1, 'Gascom', 'GC', 'GASCOM', '1111111111', 'LOS OLIVOS #111', '67676767', 'ACTIVIDAD', 'correo@gmail.com', '11787767543.png', '11791388078.jpeg', '2026-02-16 22:21:27', '2026-10-07 15:47:58');
 
 -- --------------------------------------------------------
 
@@ -107,7 +108,22 @@ INSERT INTO `historial_accions` (`id`, `user_id`, `accion`, `descripcion`, `dato
 (6, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN GASTO', '{\"id\": 3, \"nombre\": \"INTERNET ENTEL\", \"created_at\": \"2026-10-06T15:03:05.000000Z\", \"updated_at\": \"2026-10-06T15:03:05.000000Z\", \"descripcion\": \"\"}', NULL, 'GASTOS', '2026-10-06', '11:03:05', '2026-10-06 15:03:05', '2026-10-06 15:03:05'),
 (7, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN GASTO', '{\"id\": 4, \"nombre\": \"GAS 1\", \"created_at\": \"2026-10-06T15:03:12.000000Z\", \"updated_at\": \"2026-10-06T15:03:12.000000Z\", \"descripcion\": \"\"}', NULL, 'GASTOS', '2026-10-06', '11:03:12', '2026-10-06 15:03:12', '2026-10-06 15:03:12'),
 (8, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN GASTO', '{\"id\": 5, \"nombre\": \"GAS 2\", \"created_at\": \"2026-10-06T15:03:16.000000Z\", \"updated_at\": \"2026-10-06T15:03:16.000000Z\", \"descripcion\": \"\"}', NULL, 'GASTOS', '2026-10-06', '11:03:16', '2026-10-06 15:03:16', '2026-10-06 15:03:16'),
-(9, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN PAGO', '{\"id\": 1, \"mes\": \"08\", \"anio\": \"2026\", \"total\": \"354.18\", \"created_at\": \"2026-10-06T15:30:39.000000Z\", \"updated_at\": \"2026-10-06T15:30:39.000000Z\", \"pago_detalles\": [{\"id\": 1, \"fecha\": null, \"monto\": \"145.30\", \"fecha_t\": \"\", \"pago_id\": 1, \"gasto_id\": 1, \"created_at\": \"2026-10-06T15:30:39.000000Z\", \"updated_at\": \"2026-10-06T15:30:39.000000Z\"}, {\"id\": 2, \"fecha\": null, \"monto\": \"28.00\", \"fecha_t\": \"\", \"pago_id\": 1, \"gasto_id\": 2, \"created_at\": \"2026-10-06T15:30:39.000000Z\", \"updated_at\": \"2026-10-06T15:30:39.000000Z\"}, {\"id\": 3, \"fecha\": null, \"monto\": \"149.00\", \"fecha_t\": \"\", \"pago_id\": 1, \"gasto_id\": 3, \"created_at\": \"2026-10-06T15:30:39.000000Z\", \"updated_at\": \"2026-10-06T15:30:39.000000Z\"}, {\"id\": 4, \"fecha\": null, \"monto\": \"22.90\", \"fecha_t\": \"\", \"pago_id\": 1, \"gasto_id\": 4, \"created_at\": \"2026-10-06T15:30:39.000000Z\", \"updated_at\": \"2026-10-06T15:30:39.000000Z\"}, {\"id\": 5, \"fecha\": null, \"monto\": \"8.98\", \"fecha_t\": \"\", \"pago_id\": 1, \"gasto_id\": 5, \"created_at\": \"2026-10-06T15:30:39.000000Z\", \"updated_at\": \"2026-10-06T15:30:39.000000Z\"}], \"pago_participantes\": [{\"id\": 1, \"total\": \"0.00\", \"estado\": \"PENDIENTE\", \"pago_id\": 1, \"created_at\": \"2026-10-06T15:30:39.000000Z\", \"updated_at\": \"2026-10-06T15:30:39.000000Z\", \"correo_enviado\": 0, \"participante_id\": 1}, {\"id\": 2, \"total\": \"0.00\", \"estado\": \"PENDIENTE\", \"pago_id\": 1, \"created_at\": \"2026-10-06T15:30:39.000000Z\", \"updated_at\": \"2026-10-06T15:30:39.000000Z\", \"correo_enviado\": 0, \"participante_id\": 2}, {\"id\": 3, \"total\": \"0.00\", \"estado\": \"PENDIENTE\", \"pago_id\": 1, \"created_at\": \"2026-10-06T15:30:39.000000Z\", \"updated_at\": \"2026-10-06T15:30:39.000000Z\", \"correo_enviado\": 0, \"participante_id\": 3}]}', NULL, 'PAGOS', '2026-10-06', '11:30:39', '2026-10-06 15:30:39', '2026-10-06 15:30:39');
+(9, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN PAGO', '{\"id\": 1, \"mes\": \"08\", \"anio\": \"2026\", \"total\": \"354.18\", \"created_at\": \"2026-10-06T15:30:39.000000Z\", \"updated_at\": \"2026-10-06T15:30:39.000000Z\", \"pago_detalles\": [{\"id\": 1, \"fecha\": null, \"monto\": \"145.30\", \"fecha_t\": \"\", \"pago_id\": 1, \"gasto_id\": 1, \"created_at\": \"2026-10-06T15:30:39.000000Z\", \"updated_at\": \"2026-10-06T15:30:39.000000Z\"}, {\"id\": 2, \"fecha\": null, \"monto\": \"28.00\", \"fecha_t\": \"\", \"pago_id\": 1, \"gasto_id\": 2, \"created_at\": \"2026-10-06T15:30:39.000000Z\", \"updated_at\": \"2026-10-06T15:30:39.000000Z\"}, {\"id\": 3, \"fecha\": null, \"monto\": \"149.00\", \"fecha_t\": \"\", \"pago_id\": 1, \"gasto_id\": 3, \"created_at\": \"2026-10-06T15:30:39.000000Z\", \"updated_at\": \"2026-10-06T15:30:39.000000Z\"}, {\"id\": 4, \"fecha\": null, \"monto\": \"22.90\", \"fecha_t\": \"\", \"pago_id\": 1, \"gasto_id\": 4, \"created_at\": \"2026-10-06T15:30:39.000000Z\", \"updated_at\": \"2026-10-06T15:30:39.000000Z\"}, {\"id\": 5, \"fecha\": null, \"monto\": \"8.98\", \"fecha_t\": \"\", \"pago_id\": 1, \"gasto_id\": 5, \"created_at\": \"2026-10-06T15:30:39.000000Z\", \"updated_at\": \"2026-10-06T15:30:39.000000Z\"}], \"pago_participantes\": [{\"id\": 1, \"total\": \"0.00\", \"estado\": \"PENDIENTE\", \"pago_id\": 1, \"created_at\": \"2026-10-06T15:30:39.000000Z\", \"updated_at\": \"2026-10-06T15:30:39.000000Z\", \"correo_enviado\": 0, \"participante_id\": 1}, {\"id\": 2, \"total\": \"0.00\", \"estado\": \"PENDIENTE\", \"pago_id\": 1, \"created_at\": \"2026-10-06T15:30:39.000000Z\", \"updated_at\": \"2026-10-06T15:30:39.000000Z\", \"correo_enviado\": 0, \"participante_id\": 2}, {\"id\": 3, \"total\": \"0.00\", \"estado\": \"PENDIENTE\", \"pago_id\": 1, \"created_at\": \"2026-10-06T15:30:39.000000Z\", \"updated_at\": \"2026-10-06T15:30:39.000000Z\", \"correo_enviado\": 0, \"participante_id\": 3}]}', NULL, 'PAGOS', '2026-10-06', '11:30:39', '2026-10-06 15:30:39', '2026-10-06 15:30:39'),
+(10, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN PARTICIPANTE GASTO', '{\"id\": 1, \"gasto_id\": \"1\", \"created_at\": \"2026-10-07T14:35:34.000000Z\", \"porcentaje\": \"45\", \"updated_at\": \"2026-10-07T14:35:34.000000Z\", \"participante_id\": \"1\"}', NULL, 'PARTICIPANTE GASTOS', '2026-10-07', '10:35:34', '2026-10-07 14:35:34', '2026-10-07 14:35:34'),
+(11, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN PARTICIPANTE GASTO', '{\"id\": 2, \"gasto_id\": \"2\", \"created_at\": \"2026-10-07T14:37:01.000000Z\", \"porcentaje\": \"45\", \"updated_at\": \"2026-10-07T14:37:01.000000Z\", \"participante_id\": \"1\"}', NULL, 'PARTICIPANTE GASTOS', '2026-10-07', '10:37:01', '2026-10-07 14:37:01', '2026-10-07 14:37:01'),
+(12, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN PARTICIPANTE GASTO', '{\"id\": 3, \"gasto_id\": \"4\", \"created_at\": \"2026-10-07T14:37:17.000000Z\", \"porcentaje\": \"45\", \"updated_at\": \"2026-10-07T14:37:17.000000Z\", \"participante_id\": \"1\"}', NULL, 'PARTICIPANTE GASTOS', '2026-10-07', '10:37:18', '2026-10-07 14:37:18', '2026-10-07 14:37:18'),
+(13, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN PARTICIPANTE GASTO', '{\"id\": 4, \"gasto_id\": \"3\", \"created_at\": \"2026-10-07T14:37:53.000000Z\", \"porcentaje\": \"50\", \"updated_at\": \"2026-10-07T14:37:53.000000Z\", \"participante_id\": \"1\"}', NULL, 'PARTICIPANTE GASTOS', '2026-10-07', '10:37:53', '2026-10-07 14:37:53', '2026-10-07 14:37:53'),
+(14, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN PARTICIPANTE GASTO', '{\"id\": 5, \"gasto_id\": \"1\", \"created_at\": \"2026-10-07T14:38:00.000000Z\", \"porcentaje\": \"25\", \"updated_at\": \"2026-10-07T14:38:00.000000Z\", \"participante_id\": \"2\"}', NULL, 'PARTICIPANTE GASTOS', '2026-10-07', '10:38:00', '2026-10-07 14:38:00', '2026-10-07 14:38:00'),
+(15, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN PARTICIPANTE GASTO', '{\"id\": 6, \"gasto_id\": \"2\", \"created_at\": \"2026-10-07T14:38:09.000000Z\", \"porcentaje\": \"25\", \"updated_at\": \"2026-10-07T14:38:09.000000Z\", \"participante_id\": \"2\"}', NULL, 'PARTICIPANTE GASTOS', '2026-10-07', '10:38:09', '2026-10-07 14:38:09', '2026-10-07 14:38:09'),
+(16, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN PARTICIPANTE GASTO', '{\"id\": 7, \"gasto_id\": \"4\", \"created_at\": \"2026-10-07T14:38:24.000000Z\", \"porcentaje\": \"25\", \"updated_at\": \"2026-10-07T14:38:24.000000Z\", \"participante_id\": \"2\"}', NULL, 'PARTICIPANTE GASTOS', '2026-10-07', '10:38:24', '2026-10-07 14:38:24', '2026-10-07 14:38:24'),
+(17, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN PARTICIPANTE GASTO', '{\"id\": 8, \"gasto_id\": \"5\", \"created_at\": \"2026-10-07T14:38:38.000000Z\", \"porcentaje\": \"100\", \"updated_at\": \"2026-10-07T14:38:38.000000Z\", \"participante_id\": \"2\"}', NULL, 'PARTICIPANTE GASTOS', '2026-10-07', '10:38:38', '2026-10-07 14:38:38', '2026-10-07 14:38:38'),
+(18, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN PARTICIPANTE GASTO', '{\"id\": 9, \"gasto_id\": \"5\", \"created_at\": \"2026-10-07T14:38:45.000000Z\", \"porcentaje\": \"0\", \"updated_at\": \"2026-10-07T14:38:45.000000Z\", \"participante_id\": \"1\"}', NULL, 'PARTICIPANTE GASTOS', '2026-10-07', '10:38:45', '2026-10-07 14:38:45', '2026-10-07 14:38:45'),
+(19, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN PARTICIPANTE GASTO', '{\"id\": 10, \"gasto_id\": \"1\", \"created_at\": \"2026-10-07T14:38:55.000000Z\", \"porcentaje\": \"30\", \"updated_at\": \"2026-10-07T14:38:55.000000Z\", \"participante_id\": \"3\"}', NULL, 'PARTICIPANTE GASTOS', '2026-10-07', '10:38:55', '2026-10-07 14:38:55', '2026-10-07 14:38:55'),
+(20, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN PARTICIPANTE GASTO', '{\"id\": 11, \"gasto_id\": \"2\", \"created_at\": \"2026-10-07T14:39:03.000000Z\", \"porcentaje\": \"30\", \"updated_at\": \"2026-10-07T14:39:03.000000Z\", \"participante_id\": \"3\"}', NULL, 'PARTICIPANTE GASTOS', '2026-10-07', '10:39:03', '2026-10-07 14:39:03', '2026-10-07 14:39:03'),
+(21, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN PARTICIPANTE GASTO', '{\"id\": 12, \"gasto_id\": \"4\", \"created_at\": \"2026-10-07T14:39:13.000000Z\", \"porcentaje\": \"30\", \"updated_at\": \"2026-10-07T14:39:13.000000Z\", \"participante_id\": \"3\"}', NULL, 'PARTICIPANTE GASTOS', '2026-10-07', '10:39:13', '2026-10-07 14:39:13', '2026-10-07 14:39:13'),
+(22, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN PARTICIPANTE GASTO', '{\"id\": 13, \"gasto_id\": \"5\", \"created_at\": \"2026-10-07T14:39:39.000000Z\", \"porcentaje\": \"0\", \"updated_at\": \"2026-10-07T14:39:39.000000Z\", \"participante_id\": \"3\"}', NULL, 'PARTICIPANTE GASTOS', '2026-10-07', '10:39:39', '2026-10-07 14:39:39', '2026-10-07 14:39:39'),
+(23, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN PARTICIPANTE GASTO', '{\"id\": 14, \"gasto_id\": \"3\", \"created_at\": \"2026-10-07T14:39:48.000000Z\", \"porcentaje\": \"50\", \"updated_at\": \"2026-10-07T14:39:48.000000Z\", \"participante_id\": \"3\"}', NULL, 'PARTICIPANTE GASTOS', '2026-10-07', '10:39:48', '2026-10-07 14:39:48', '2026-10-07 14:39:48'),
+(24, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN PARTICIPANTE GASTO', '{\"id\": 15, \"gasto_id\": \"3\", \"created_at\": \"2026-10-07T14:43:06.000000Z\", \"porcentaje\": \"0\", \"updated_at\": \"2026-10-07T14:43:06.000000Z\", \"participante_id\": \"2\"}', NULL, 'PARTICIPANTE GASTOS', '2026-10-07', '10:43:06', '2026-10-07 14:43:06', '2026-10-07 14:43:06');
 
 -- --------------------------------------------------------
 
@@ -134,7 +150,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (6, '2026_10_05_101612_create_pagos_table', 1),
 (7, '2026_10_05_101613_create_pago_detalles_table', 1),
 (8, '2026_10_05_101615_create_pago_participantes_table', 1),
-(9, '2026_10_06_105225_create_pago_gastos_table', 2);
+(9, '2026_10_06_105225_create_pago_gastos_table', 2),
+(10, '2026_10_07_101728_create_participante_gastos_table', 3);
 
 -- --------------------------------------------------------
 
@@ -200,7 +217,7 @@ CREATE TABLE `pago_gastos` (
   `participante_id` bigint UNSIGNED NOT NULL,
   `pago_participante_id` bigint UNSIGNED NOT NULL,
   `gasto_id` bigint UNSIGNED NOT NULL,
-  `porcentaje_pago` double NOT NULL DEFAULT '0',
+  `porcentaje_pago` double(11,8) NOT NULL DEFAULT '0.00000000',
   `monto_pagado` decimal(24,2) NOT NULL DEFAULT '0.00',
   `estado` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'PENDIENTE',
   `created_at` timestamp NULL DEFAULT NULL,
@@ -212,21 +229,21 @@ CREATE TABLE `pago_gastos` (
 --
 
 INSERT INTO `pago_gastos` (`id`, `pago_id`, `pago_detalle_id`, `participante_id`, `pago_participante_id`, `gasto_id`, `porcentaje_pago`, `monto_pagado`, `estado`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, 1, 1, 1, 33.33, 48.43, 'PENDIENTE', '2026-10-06 16:00:47', '2026-10-06 16:00:47'),
-(2, 1, 2, 1, 1, 2, 33.33, 9.33, 'PENDIENTE', '2026-10-06 16:00:47', '2026-10-06 16:00:47'),
-(3, 1, 3, 1, 1, 3, 33.33, 49.66, 'PENDIENTE', '2026-10-06 16:00:47', '2026-10-06 16:00:47'),
-(4, 1, 4, 1, 1, 4, 33.33, 7.63, 'PENDIENTE', '2026-10-06 16:00:47', '2026-10-06 16:00:47'),
-(5, 1, 5, 1, 1, 5, 33.33, 2.99, 'PENDIENTE', '2026-10-06 16:00:47', '2026-10-06 16:00:47'),
-(6, 1, 1, 2, 2, 1, 33.33, 48.43, 'PENDIENTE', '2026-10-06 16:00:47', '2026-10-06 16:00:47'),
-(7, 1, 2, 2, 2, 2, 33.33, 9.33, 'PENDIENTE', '2026-10-06 16:00:47', '2026-10-06 16:00:47'),
-(8, 1, 3, 2, 2, 3, 33.33, 49.66, 'PENDIENTE', '2026-10-06 16:00:47', '2026-10-06 16:00:47'),
-(9, 1, 4, 2, 2, 4, 33.33, 7.63, 'PENDIENTE', '2026-10-06 16:00:47', '2026-10-06 16:00:47'),
-(10, 1, 5, 2, 2, 5, 33.33, 2.99, 'PENDIENTE', '2026-10-06 16:00:47', '2026-10-06 16:00:47'),
-(11, 1, 1, 3, 3, 1, 33.33, 48.43, 'PENDIENTE', '2026-10-06 16:00:47', '2026-10-06 16:00:47'),
-(12, 1, 2, 3, 3, 2, 33.33, 9.33, 'PENDIENTE', '2026-10-06 16:00:47', '2026-10-06 16:00:47'),
-(13, 1, 3, 3, 3, 3, 33.33, 49.66, 'PENDIENTE', '2026-10-06 16:00:47', '2026-10-06 16:00:47'),
-(14, 1, 4, 3, 3, 4, 33.33, 7.63, 'PENDIENTE', '2026-10-06 16:00:47', '2026-10-06 16:00:47'),
-(15, 1, 5, 3, 3, 5, 33.33, 2.99, 'PENDIENTE', '2026-10-06 16:00:47', '2026-10-06 16:00:47');
+(1, 1, 1, 1, 1, 1, 45.00000000, 65.39, 'PENDIENTE', '2026-10-07 14:43:17', '2026-10-07 14:43:17'),
+(2, 1, 2, 1, 1, 2, 45.00000000, 12.60, 'PENDIENTE', '2026-10-07 14:43:17', '2026-10-07 14:43:17'),
+(3, 1, 3, 1, 1, 3, 50.00000000, 74.50, 'PENDIENTE', '2026-10-07 14:43:17', '2026-10-07 14:43:17'),
+(4, 1, 4, 1, 1, 4, 45.00000000, 10.31, 'PENDIENTE', '2026-10-07 14:43:17', '2026-10-07 14:43:17'),
+(5, 1, 5, 1, 1, 5, 0.00000000, 0.00, 'PENDIENTE', '2026-10-07 14:43:17', '2026-10-07 14:43:17'),
+(6, 1, 1, 2, 2, 1, 25.00000000, 36.33, 'PENDIENTE', '2026-10-07 14:43:17', '2026-10-07 14:43:17'),
+(7, 1, 2, 2, 2, 2, 25.00000000, 7.00, 'PENDIENTE', '2026-10-07 14:43:17', '2026-10-07 14:43:17'),
+(8, 1, 3, 2, 2, 3, 0.00000000, 0.00, 'PENDIENTE', '2026-10-07 14:43:17', '2026-10-07 14:43:17'),
+(9, 1, 4, 2, 2, 4, 25.00000000, 5.73, 'PENDIENTE', '2026-10-07 14:43:17', '2026-10-07 14:43:17'),
+(10, 1, 5, 2, 2, 5, 100.00000000, 8.98, 'PENDIENTE', '2026-10-07 14:43:17', '2026-10-07 14:43:17'),
+(11, 1, 1, 3, 3, 1, 30.00000000, 43.59, 'PENDIENTE', '2026-10-07 14:43:17', '2026-10-07 14:43:17'),
+(12, 1, 2, 3, 3, 2, 30.00000000, 8.40, 'PENDIENTE', '2026-10-07 14:43:17', '2026-10-07 14:43:17'),
+(13, 1, 3, 3, 3, 3, 50.00000000, 74.50, 'PENDIENTE', '2026-10-07 14:43:17', '2026-10-07 14:43:17'),
+(14, 1, 4, 3, 3, 4, 30.00000000, 6.87, 'PENDIENTE', '2026-10-07 14:43:17', '2026-10-07 14:43:17'),
+(15, 1, 5, 3, 3, 5, 0.00000000, 0.00, 'PENDIENTE', '2026-10-07 14:43:17', '2026-10-07 14:43:17');
 
 -- --------------------------------------------------------
 
@@ -250,9 +267,9 @@ CREATE TABLE `pago_participantes` (
 --
 
 INSERT INTO `pago_participantes` (`id`, `pago_id`, `participante_id`, `correo_enviado`, `total`, `estado`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, 0, 0.00, 'PENDIENTE', '2026-10-06 15:30:39', '2026-10-06 16:02:48'),
-(2, 1, 2, 0, 0.00, 'PENDIENTE', '2026-10-06 15:30:39', '2026-10-06 16:02:48'),
-(3, 1, 3, 0, 0.00, 'PENDIENTE', '2026-10-06 15:30:39', '2026-10-06 16:02:48');
+(1, 1, 1, 0, 162.80, 'PENDIENTE', '2026-10-06 15:30:39', '2026-10-07 15:51:27'),
+(2, 1, 2, 0, 58.04, 'PENDIENTE', '2026-10-06 15:30:39', '2026-10-07 15:51:27'),
+(3, 1, 3, 0, 133.36, 'PENDIENTE', '2026-10-06 15:30:39', '2026-10-07 15:51:27');
 
 -- --------------------------------------------------------
 
@@ -277,6 +294,42 @@ INSERT INTO `participantes` (`id`, `nombre`, `correo`, `descripcion`, `created_a
 (1, 'JUAN PABLO', 'juanpablo@gmail.com', '', '2026-10-06 15:02:20', '2026-10-06 15:02:20'),
 (2, 'EDWIN', 'edwin@gmail.com', '', '2026-10-06 15:02:30', '2026-10-06 15:02:30'),
 (3, 'GONZALO', 'victorgonzalo.as@gmail.com', '', '2026-10-06 15:02:43', '2026-10-06 15:02:43');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `participante_gastos`
+--
+
+CREATE TABLE `participante_gastos` (
+  `id` bigint UNSIGNED NOT NULL,
+  `participante_id` bigint UNSIGNED NOT NULL,
+  `gasto_id` bigint UNSIGNED NOT NULL,
+  `porcentaje` double NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `participante_gastos`
+--
+
+INSERT INTO `participante_gastos` (`id`, `participante_id`, `gasto_id`, `porcentaje`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, 45, '2026-10-07 14:35:34', '2026-10-07 14:35:34'),
+(2, 1, 2, 45, '2026-10-07 14:37:01', '2026-10-07 14:37:01'),
+(3, 1, 4, 45, '2026-10-07 14:37:17', '2026-10-07 14:37:17'),
+(4, 1, 3, 50, '2026-10-07 14:37:53', '2026-10-07 14:37:53'),
+(5, 2, 1, 25, '2026-10-07 14:38:00', '2026-10-07 14:38:00'),
+(6, 2, 2, 25, '2026-10-07 14:38:09', '2026-10-07 14:38:09'),
+(7, 2, 4, 25, '2026-10-07 14:38:24', '2026-10-07 14:38:24'),
+(8, 2, 5, 100, '2026-10-07 14:38:38', '2026-10-07 14:38:38'),
+(9, 1, 5, 0, '2026-10-07 14:38:45', '2026-10-07 14:38:45'),
+(10, 3, 1, 30, '2026-10-07 14:38:55', '2026-10-07 14:38:55'),
+(11, 3, 2, 30, '2026-10-07 14:39:03', '2026-10-07 14:39:03'),
+(12, 3, 4, 30, '2026-10-07 14:39:13', '2026-10-07 14:39:13'),
+(13, 3, 5, 0, '2026-10-07 14:39:39', '2026-10-07 14:39:39'),
+(14, 3, 3, 50, '2026-10-07 14:39:48', '2026-10-07 14:39:48'),
+(15, 2, 3, 0, '2026-10-07 14:43:06', '2026-10-07 14:43:06');
 
 -- --------------------------------------------------------
 
@@ -384,6 +437,14 @@ ALTER TABLE `participantes`
   ADD UNIQUE KEY `participantes_correo_unique` (`correo`);
 
 --
+-- Indices de la tabla `participante_gastos`
+--
+ALTER TABLE `participante_gastos`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `participante_gastos_participante_id_foreign` (`participante_id`),
+  ADD KEY `participante_gastos_gasto_id_foreign` (`gasto_id`);
+
+--
 -- Indices de la tabla `users`
 --
 ALTER TABLE `users`
@@ -409,13 +470,13 @@ ALTER TABLE `gastos`
 -- AUTO_INCREMENT de la tabla `historial_accions`
 --
 ALTER TABLE `historial_accions`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT de la tabla `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `pagos`
@@ -446,6 +507,12 @@ ALTER TABLE `pago_participantes`
 --
 ALTER TABLE `participantes`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `participante_gastos`
+--
+ALTER TABLE `participante_gastos`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
@@ -486,6 +553,13 @@ ALTER TABLE `pago_gastos`
 ALTER TABLE `pago_participantes`
   ADD CONSTRAINT `pago_participantes_pago_id_foreign` FOREIGN KEY (`pago_id`) REFERENCES `pagos` (`id`),
   ADD CONSTRAINT `pago_participantes_participante_id_foreign` FOREIGN KEY (`participante_id`) REFERENCES `participantes` (`id`);
+
+--
+-- Filtros para la tabla `participante_gastos`
+--
+ALTER TABLE `participante_gastos`
+  ADD CONSTRAINT `participante_gastos_gasto_id_foreign` FOREIGN KEY (`gasto_id`) REFERENCES `gastos` (`id`),
+  ADD CONSTRAINT `participante_gastos_participante_id_foreign` FOREIGN KEY (`participante_id`) REFERENCES `participantes` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -19,11 +19,31 @@ class Configuracion extends Model
         "actividad",
         "correo",
         "logo",
+        "qr",
     ];
 
     protected $casts = [];
 
-    protected $appends = ["url_logo", "logo_b64"];
+    protected $appends = ["url_logo", "logo_b64", "url_qr", "qr_b64"];
+
+    public function getUrlQrAttribute()
+    {
+        if (!$this->qr) return "";
+        return asset("imgs/" . $this->qr);
+    }
+
+    public function getQrB64Attribute()
+    {
+        if (!$this->qr) return "";
+        $path = public_path("imgs/" . $this->qr);
+        if (file_exists($path)) {
+            $type = pathinfo($path, PATHINFO_EXTENSION);
+            $data = file_get_contents($path);
+            $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+            return $base64;
+        }
+        return "";
+    }
 
     public function getUrlLogoAttribute()
     {

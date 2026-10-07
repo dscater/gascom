@@ -154,6 +154,15 @@ onUnmounted(() => {});
                     <ItemMenu
                         v-if="
                             permisos == '*' ||
+                            permisos.includes('participante_gastos.index')
+                        "
+                        :label="'Participante Gastos'"
+                        :ruta="'participante_gastos.index'"
+                        :icon="'fa fa-percent'"
+                    ></ItemMenu>
+                    <ItemMenu
+                        v-if="
+                            permisos == '*' ||
                             permisos.includes('participantes.index')
                         "
                         :label="'Participantes'"

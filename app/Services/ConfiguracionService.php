@@ -49,12 +49,14 @@ class ConfiguracionService
             ]);
         }
 
-        Log::debug("BBB");
         // cargar logo
         if ($datos["logo"] && !is_string($datos["logo"])) {
             $this->cargarLogo($configuracion, $datos["logo"]);
         }
-        Log::debug("BBB");
+
+        if ($datos["qr"] && !is_string($datos["qr"])) {
+            $this->cargarQr($configuracion, $datos["qr"]);
+        }
 
         return $configuracion;
     }
@@ -66,6 +68,17 @@ class ConfiguracionService
         }
         $nombre = $configuracion->id . time();
         $configuracion->logo = $this->cargarArchivoService->cargarArchivo($logo, public_path("imgs"), $nombre);
+        $configuracion->save();
+    }
+
+
+    public function cargarQr(Configuracion $configuracion, UploadedFile $qr): void
+    {
+        if ($configuracion->qr) {
+            \File::delete(public_path("imgs/" . $configuracion->qr));
+        }
+        $nombre = $configuracion->id . time();
+        $configuracion->qr = $this->cargarArchivoService->cargarArchivo($qr, public_path("imgs"), $nombre);
         $configuracion->save();
     }
 }

@@ -10,6 +10,12 @@ class PermisoService
 {
     protected $arrayPermisos = [
         "ADMINISTRADOR" => [
+            "configuracions.index",
+            "configuracions.create",
+            "configuracions.edit",
+            "configuracions.update",
+            "configuracions.destroy",
+
             "usuarios.paginado",
             "usuarios.index",
             "usuarios.listado",
@@ -44,6 +50,16 @@ class PermisoService
             "participantes.update",
             "participantes.destroy",
 
+            "participante_gastos.paginado",
+            "participante_gastos.index",
+            "participante_gastos.listado",
+            "participante_gastos.create",
+            "participante_gastos.store",
+            "partieipante_gastos.edit",
+            "participante_gastos.show",
+            "participante_gastos.update",
+            "participante_gastos.destroy",
+
             "pagos.paginado",
             "pagos.index",
             "pagos.listado",
@@ -54,6 +70,7 @@ class PermisoService
             "pagos.update",
             "pagos.destroy",
             "pagos.distribuir",
+            "pagos.guardar_distribuir",
 
             "reportes.usuarios",
             "reportes.r_usuarios",
