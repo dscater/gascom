@@ -252,6 +252,71 @@ const totalPago = computed(() => {
     }, 0);
 });
 
+const gastosIndexados = computed(() => {
+    const mapa = {};
+    for (const gasto of form.pago_gastos) {
+        const key = `${gasto.pago_detalle_id}_${gasto.pago_participante_id}`;
+        mapa[key] = gasto;
+    }
+
+    return mapa;
+});
+
+const totalesFilas = computed(() => {
+    const totales = {};
+
+    for (const fila of matrizGastos.value) {
+        totales[fila.detalle.id] = fila.participantes.reduce((total, item) => {
+            return total + Number(item.gasto?.monto_pagado ?? 0);
+        }, 0);
+    }
+
+    return totales;
+});
+
+const totalesColumnas = computed(() => {
+    const totales = {};
+
+    for (const participante of form.pago_participantes) {
+        totales[participante.id] = 0;
+    }
+
+    for (const fila of matrizGastos.value) {
+        for (const item of fila.participantes) {
+            totales[item.participante.id] += Number(
+                item.gasto?.monto_pagado ?? 0,
+            );
+        }
+    }
+
+    return totales;
+});
+
+const matrizGastos = computed(() => {
+    return props.form.pago_detalles.map((detalle) => {
+        return {
+            detalle,
+
+            participantes: props.form.pago_participantes.map((participante) => {
+                const key = `${detalle.id}_${participante.id}`;
+
+                return {
+                    participante,
+                    gasto: gastosIndexados.value[key] ?? {
+                        pago_id: form.id,
+                        pago_detalle_id: detalle.id,
+                        pago_participante_id: participante.id,
+                        gasto_id: detalle.gasto_id,
+                        porcentaje_pago: 0,
+                        monto_pagado: 0,
+                        estado: "PENDIENTE",
+                    },
+                };
+            }),
+        };
+    });
+});
+
 watch([totalPago], (newTotalPago) => {
     form.total = parseFloat(newTotalPago);
 });
@@ -313,16 +378,234 @@ onMounted(() => {
                     </div>
                 </div>
                 <div class="card mt-2">
+                    <div class="card-header">
+                        <button
+                            type="button"
+                            class="btn btn-light bg-dark text-white btn-sm fs-7 me-1"
+                            @click.prevent="agregarPagoDetalle"
+                        >
+                            <i class="fa fa-plus"></i> Agregar Detalle
+                        </button>
+                        <button
+                            type="button"
+                            class="btn btn-primary btn-sm fs-7"
+                            @click.prevent="agregarParticipante"
+                        >
+                            <i class="fa fa-plus"></i> Agregar Participante
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th style="width: 300px">Gasto</th>
+                                    <th
+                                        style="width: 300px"
+                                        v-for="(
+                                            participante, index_participante
+                                        ) in form.pago_participantes"
+                                        :key="participante.id"
+                                    >
+                                        <button
+                                            type="button"
+                                            class="btn btn-danger fs-8 rounded-0 h-100"
+                                            @click.prevent="
+                                                quitarPagoParticipante(
+                                                    participante,
+                                                    index_participante,
+                                                )
+                                            "
+                                        >
+                                            <i class="fa fa-times"></i>
+                                        </button>
+                                        <el-select
+                                            v-model="
+                                                participante.participante_id
+                                            "
+                                            class="el-select-input-group-left"
+                                            size="large"
+                                            placeholder="Participante"
+                                            filterable
+                                            no-data-text="Sin datos"
+                                            no-match-text="Sin resultados"
+                                        >
+                                            <el-option
+                                                v-for="item in listParticipantes"
+                                                :key="item.id"
+                                                :value="item.id"
+                                                :label="item.nombre"
+                                            ></el-option
+                                        ></el-select>
+                                    </th>
+
+                                    <th>TOTAL</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr
+                                    v-for="(fila, index_fila) in matrizGastos"
+                                    :key="fila.detalle.id"
+                                >
+                                    <!-- Detalle -->
+                                    <td style="width: 300px">
+                                        <div class="">
+                                            <button
+                                                type="button"
+                                                class="btn btn-danger btn-sm fs-8"
+                                                @click.prevent="
+                                                    quitarPagoDetalle(
+                                                        fila,
+                                                        index_fila,
+                                                    )
+                                                "
+                                            >
+                                                <i class="fa fa-times"></i>
+                                            </button>
+                                        </div>
+                                        <div class="">
+                                            <el-select
+                                                v-model="fila.gasto_id"
+                                                placeholder="Gasto"
+                                                filterable
+                                                no-data-text="Sin datos"
+                                                no-match-text="Sin resultados"
+                                            >
+                                                <el-option
+                                                    v-for="item in listGastos"
+                                                    :key="item.id"
+                                                    :value="item.id"
+                                                    :label="item.nombre"
+                                                ></el-option
+                                            ></el-select>
+                                        </div>
+                                        <div class="">
+                                            <input
+                                                type="number"
+                                                v-model="fila.monto"
+                                                class="form-control"
+                                                placeholder="Monto"
+                                            />
+                                        </div>
+                                        <div class="form-group">
+                                            <input
+                                                type="date"
+                                                v-model="fila.fecha"
+                                                class="form-control"
+                                                placeholder="Fecha"
+                                            />
+                                        </div>
+                                    </td>
+
+                                    <!-- Participantes -->
+                                    <td
+                                        v-for="item in fila.participantes"
+                                        :key="item.participante.id"
+                                    >
+                                        <div>
+                                            <div class="input-group">
+                                                <span class="input-group-text">
+                                                    <i
+                                                        class="fa fa-percent"
+                                                    ></i> </span
+                                                ><input
+                                                    type="number"
+                                                    step="0.01"
+                                                    min="0"
+                                                    class="form-control"
+                                                    v-model.number="
+                                                        item.gasto
+                                                            .porcentaje_pago
+                                                    "
+                                                    @change="
+                                                        cambiarPorcentaje(
+                                                            item,
+                                                            fila.detalle,
+                                                        )
+                                                    "
+                                                    @keyup.enter="
+                                                        cambiarPorcentaje(
+                                                            item,
+                                                            fila.detalle,
+                                                        )
+                                                    "
+                                                />
+                                            </div>
+                                        </div>
+                                        <div class="mt-1">
+                                            <div class="input-group">
+                                                <span
+                                                    class="input-group-text fs-8 fw-bold"
+                                                >
+                                                    Bs.
+                                                </span>
+                                                <input
+                                                    type="number"
+                                                    step="0.01"
+                                                    min="0"
+                                                    class="form-control"
+                                                    v-model.number="
+                                                        item.gasto.monto_pagado
+                                                    "
+                                                    @change="
+                                                        cambiarMonto(
+                                                            item,
+                                                            fila.detalle,
+                                                        )
+                                                    "
+                                                    @keyup.enter="
+                                                        cambiarMonto(
+                                                            item,
+                                                            fila.detalle,
+                                                        )
+                                                    "
+                                                />
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <!-- Total del detalle -->
+                                    <td>
+                                        Bs.
+                                        {{
+                                            totalesFilas[
+                                                fila.detalle.id
+                                            ].toFixed(2)
+                                        }}
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>TOTAL</th>
+
+                                    <th
+                                        v-for="participante in form.pago_participantes"
+                                        :key="participante.id"
+                                    >
+                                        Bs.
+                                        {{
+                                            Number(
+                                                totalesColumnas[
+                                                    participante.id
+                                                ] ?? 0,
+                                            ).toFixed(2)
+                                        }}
+                                    </th>
+
+                                    <th>
+                                        Bs.
+                                        {{ Number(form.total).toFixed(2) }}
+                                    </th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card mt-2">
                     <div class="card-header bg1">
                         <h4 class="card-title text-white">
                             <i class="fa fa-table"></i> Detalles del pago
-                            <button
-                                type="button"
-                                class="btn btn-primary btn-sm fs-7"
-                                @click.prevent="agregarPagoDetalle"
-                            >
-                                <i class="fa fa-plus"></i> Agregar Detalle
-                            </button>
                         </h4>
                     </div>
                     <div class="card-body bg-dark-gray">
@@ -333,61 +616,7 @@ onMounted(() => {
                             >
                                 <div class="card mt-2">
                                     <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <button
-                                                    type="button"
-                                                    class="btn btn-danger btn-sm fs-8"
-                                                    @click.prevent="
-                                                        quitarPagoDetalle(
-                                                            item,
-                                                            index,
-                                                        )
-                                                    "
-                                                >
-                                                    <i class="fa fa-times"></i>
-                                                </button>
-                                            </div>
-                                            <div class="col-md-4 form-group">
-                                                <label class="required"
-                                                    >Gasto</label
-                                                >
-                                                <el-select
-                                                    v-model="item.gasto_id"
-                                                    placeholder="Gasto"
-                                                    filterable
-                                                    no-data-text="Sin datos"
-                                                    no-match-text="Sin resultados"
-                                                >
-                                                    <el-option
-                                                        v-for="item in listGastos"
-                                                        :key="item.id"
-                                                        :value="item.id"
-                                                        :label="item.nombre"
-                                                    ></el-option
-                                                ></el-select>
-                                            </div>
-                                            <div class="col-md-4 form-group">
-                                                <label class="required"
-                                                    >Monto</label
-                                                >
-                                                <input
-                                                    type="number"
-                                                    v-model="item.monto"
-                                                    class="form-control"
-                                                    placeholder="Monto"
-                                                />
-                                            </div>
-                                            <div class="col-md-4 form-group">
-                                                <label>Fecha</label>
-                                                <input
-                                                    type="date"
-                                                    v-model="item.fecha"
-                                                    class="form-control"
-                                                    placeholder="Fecha"
-                                                />
-                                            </div>
-                                        </div>
+                                        <div class="row"></div>
                                     </div>
                                 </div>
                             </div>
@@ -408,13 +637,6 @@ onMounted(() => {
                     <div class="card-header bg1">
                         <h4 class="card-title text-white">
                             <i class="fa fa-user-friends"></i> Participantes
-                            <button
-                                type="button"
-                                class="btn btn-primary btn-sm fs-7"
-                                @click.prevent="agregarParticipante"
-                            >
-                                <i class="fa fa-plus"></i> Agregar Participante
-                            </button>
                         </h4>
                     </div>
                     <div class="card-body">
@@ -425,38 +647,10 @@ onMounted(() => {
                             >
                                 <label class="required">Participante</label>
                                 <div class="input-group">
-                                    <div class="form-control border-0 p-0">
-                                        <el-select
-                                            v-model="item.participante_id"
-                                            class="el-select-input-group-left"
-                                            size="large"
-                                            placeholder="Participante"
-                                            filterable
-                                            no-data-text="Sin datos"
-                                            no-match-text="Sin resultados"
-                                        >
-                                            <el-option
-                                                v-for="item in listParticipantes"
-                                                :key="item.id"
-                                                :value="item.id"
-                                                :label="item.nombre"
-                                            ></el-option
-                                        ></el-select>
-                                    </div>
-                                    <div class="input-group-text p-0">
-                                        <button
-                                            type="button"
-                                            class="btn btn-danger fs-8 rounded-0 h-100"
-                                            @click.prevent="
-                                                quitarPagoParticipante(
-                                                    item,
-                                                    index,
-                                                )
-                                            "
-                                        >
-                                            <i class="fa fa-times"></i>
-                                        </button>
-                                    </div>
+                                    <div
+                                        class="form-control border-0 p-0"
+                                    ></div>
+                                    <div class="input-group-text p-0"></div>
                                 </div>
                             </div>
                             <div
