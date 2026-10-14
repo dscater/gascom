@@ -120,7 +120,7 @@ class PagoController extends Controller
 
     public function edit(Pago $pago): ResponseInertia
     {
-        $pago = $pago->load(["pago_detalles", "pago_participantes"]);
+        $pago = $pago->load(["pago_detalles", "pago_participantes", "pago_gastos"]);
         return Inertia::render("Admin/Pagos/Edit", compact("pago"));
     }
 

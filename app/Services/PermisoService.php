@@ -59,6 +59,7 @@ class PermisoService
             "participante_gastos.show",
             "participante_gastos.update",
             "participante_gastos.destroy",
+            "participante_gastos.porcentaje",
 
             "pagos.paginado",
             "pagos.index",

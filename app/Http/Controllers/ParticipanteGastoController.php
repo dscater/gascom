@@ -128,6 +128,25 @@ class ParticipanteGastoController extends Controller
         }
     }
 
+    public function porcentaje(Request $request)
+    {
+        $request->validate([
+            "participante_id" => "required|integer|min:1",
+            "gasto_id" => "required|integer|min:1",
+        ]);
+
+        $registro = ParticipanteGasto::where(
+            "participante_id",
+            $request->participante_id
+        )
+            ->where("gasto_id", $request->gasto_id)
+            ->first();
+
+        return response()->json([
+            "porcentaje" => (float) ($registro?->porcentaje ?? 0),
+        ]);
+    }
+
     /**
      * Eliminar participante_gasto
      *

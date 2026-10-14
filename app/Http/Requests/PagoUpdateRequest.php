@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Rules\PagoDetalleRule;
+use App\Rules\PagoGastosRule;
 use App\Rules\PagoParticipanteRule;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
@@ -30,6 +31,7 @@ class PagoUpdateRequest extends FormRequest
             "total" => "required",
             "pago_detalles" => ["required", "array", "min:1", new PagoDetalleRule()],
             "pago_participantes" => ["required", "array", "min:1", new PagoParticipanteRule()],
+            "pago_gastos" => ["required", "array", "min:1", new PagoGastosRule()],
             "eliminados_detalles" => "nullable",
             "eliminados_participantes" => "nullable",
         ];

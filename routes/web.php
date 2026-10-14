@@ -92,7 +92,7 @@ Route::middleware(['auth', 'permisoUsuario'])->prefix("admin")->group(function (
     // PARTICIPANTE GASTOS
     Route::get("participante_gastos/paginado", [ParticipanteGastoController::class, 'paginado'])->name("participante_gastos.paginado");
     Route::get("participante_gastos/listado", [ParticipanteGastoController::class, 'listado'])->name("participante_gastos.listado");
-    Route::patch("participante_gastos/finalizar/{campeonato}", [ParticipanteGastoController::class, 'finalizar'])->name("participante_gastos.finalizar");
+    Route::get("/participante_gastos/porcentaje", [ParticipanteGastoController::class, "porcentaje"])->name("participante_gastos.porcentaje");
     Route::resource("participante_gastos", ParticipanteGastoController::class)->only(
         ["index", "store", "edit", "show", "update", "destroy"]
     );

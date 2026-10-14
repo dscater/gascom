@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 07-10-2026 a las 18:30:39
+-- Tiempo de generación: 14-10-2026 a las 14:18:48
 -- Versión del servidor: 8.0.30
 -- Versión de PHP: 8.2.22
 
@@ -100,31 +100,13 @@ CREATE TABLE `historial_accions` (
 --
 
 INSERT INTO `historial_accions` (`id`, `user_id`, `accion`, `descripcion`, `datos_original`, `datos_nuevo`, `modulo`, `fecha`, `hora`, `created_at`, `updated_at`) VALUES
-(1, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN PARTICIPANTE', '{\"id\": 1, \"correo\": \"juanpablo@gmail.com\", \"nombre\": \"JUAN PABLO\", \"created_at\": \"2026-10-06T15:02:20.000000Z\", \"updated_at\": \"2026-10-06T15:02:20.000000Z\", \"descripcion\": \"\"}', NULL, 'PARTICIPANTES', '2026-10-06', '11:02:20', '2026-10-06 15:02:20', '2026-10-06 15:02:20'),
-(2, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN PARTICIPANTE', '{\"id\": 2, \"correo\": \"edwin@gmail.com\", \"nombre\": \"EDWIN\", \"created_at\": \"2026-10-06T15:02:30.000000Z\", \"updated_at\": \"2026-10-06T15:02:30.000000Z\", \"descripcion\": \"\"}', NULL, 'PARTICIPANTES', '2026-10-06', '11:02:30', '2026-10-06 15:02:30', '2026-10-06 15:02:30'),
-(3, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN PARTICIPANTE', '{\"id\": 3, \"correo\": \"victorgonzalo.as@gmail.com\", \"nombre\": \"GONZALO\", \"created_at\": \"2026-10-06T15:02:43.000000Z\", \"updated_at\": \"2026-10-06T15:02:43.000000Z\", \"descripcion\": \"\"}', NULL, 'PARTICIPANTES', '2026-10-06', '11:02:43', '2026-10-06 15:02:43', '2026-10-06 15:02:43'),
-(4, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN GASTO', '{\"id\": 1, \"nombre\": \"LUZ\", \"created_at\": \"2026-10-06T15:02:54.000000Z\", \"updated_at\": \"2026-10-06T15:02:54.000000Z\", \"descripcion\": \"\"}', NULL, 'GASTOS', '2026-10-06', '11:02:54', '2026-10-06 15:02:54', '2026-10-06 15:02:54'),
-(5, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN GASTO', '{\"id\": 2, \"nombre\": \"AGUA\", \"created_at\": \"2026-10-06T15:02:59.000000Z\", \"updated_at\": \"2026-10-06T15:02:59.000000Z\", \"descripcion\": \"\"}', NULL, 'GASTOS', '2026-10-06', '11:02:59', '2026-10-06 15:02:59', '2026-10-06 15:02:59'),
-(6, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN GASTO', '{\"id\": 3, \"nombre\": \"INTERNET ENTEL\", \"created_at\": \"2026-10-06T15:03:05.000000Z\", \"updated_at\": \"2026-10-06T15:03:05.000000Z\", \"descripcion\": \"\"}', NULL, 'GASTOS', '2026-10-06', '11:03:05', '2026-10-06 15:03:05', '2026-10-06 15:03:05'),
-(7, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN GASTO', '{\"id\": 4, \"nombre\": \"GAS 1\", \"created_at\": \"2026-10-06T15:03:12.000000Z\", \"updated_at\": \"2026-10-06T15:03:12.000000Z\", \"descripcion\": \"\"}', NULL, 'GASTOS', '2026-10-06', '11:03:12', '2026-10-06 15:03:12', '2026-10-06 15:03:12'),
-(8, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN GASTO', '{\"id\": 5, \"nombre\": \"GAS 2\", \"created_at\": \"2026-10-06T15:03:16.000000Z\", \"updated_at\": \"2026-10-06T15:03:16.000000Z\", \"descripcion\": \"\"}', NULL, 'GASTOS', '2026-10-06', '11:03:16', '2026-10-06 15:03:16', '2026-10-06 15:03:16'),
-(9, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN PAGO', '{\"id\": 1, \"mes\": \"08\", \"anio\": \"2026\", \"total\": \"354.18\", \"created_at\": \"2026-10-06T15:30:39.000000Z\", \"updated_at\": \"2026-10-06T15:30:39.000000Z\", \"pago_detalles\": [{\"id\": 1, \"fecha\": null, \"monto\": \"145.30\", \"fecha_t\": \"\", \"pago_id\": 1, \"gasto_id\": 1, \"created_at\": \"2026-10-06T15:30:39.000000Z\", \"updated_at\": \"2026-10-06T15:30:39.000000Z\"}, {\"id\": 2, \"fecha\": null, \"monto\": \"28.00\", \"fecha_t\": \"\", \"pago_id\": 1, \"gasto_id\": 2, \"created_at\": \"2026-10-06T15:30:39.000000Z\", \"updated_at\": \"2026-10-06T15:30:39.000000Z\"}, {\"id\": 3, \"fecha\": null, \"monto\": \"149.00\", \"fecha_t\": \"\", \"pago_id\": 1, \"gasto_id\": 3, \"created_at\": \"2026-10-06T15:30:39.000000Z\", \"updated_at\": \"2026-10-06T15:30:39.000000Z\"}, {\"id\": 4, \"fecha\": null, \"monto\": \"22.90\", \"fecha_t\": \"\", \"pago_id\": 1, \"gasto_id\": 4, \"created_at\": \"2026-10-06T15:30:39.000000Z\", \"updated_at\": \"2026-10-06T15:30:39.000000Z\"}, {\"id\": 5, \"fecha\": null, \"monto\": \"8.98\", \"fecha_t\": \"\", \"pago_id\": 1, \"gasto_id\": 5, \"created_at\": \"2026-10-06T15:30:39.000000Z\", \"updated_at\": \"2026-10-06T15:30:39.000000Z\"}], \"pago_participantes\": [{\"id\": 1, \"total\": \"0.00\", \"estado\": \"PENDIENTE\", \"pago_id\": 1, \"created_at\": \"2026-10-06T15:30:39.000000Z\", \"updated_at\": \"2026-10-06T15:30:39.000000Z\", \"correo_enviado\": 0, \"participante_id\": 1}, {\"id\": 2, \"total\": \"0.00\", \"estado\": \"PENDIENTE\", \"pago_id\": 1, \"created_at\": \"2026-10-06T15:30:39.000000Z\", \"updated_at\": \"2026-10-06T15:30:39.000000Z\", \"correo_enviado\": 0, \"participante_id\": 2}, {\"id\": 3, \"total\": \"0.00\", \"estado\": \"PENDIENTE\", \"pago_id\": 1, \"created_at\": \"2026-10-06T15:30:39.000000Z\", \"updated_at\": \"2026-10-06T15:30:39.000000Z\", \"correo_enviado\": 0, \"participante_id\": 3}]}', NULL, 'PAGOS', '2026-10-06', '11:30:39', '2026-10-06 15:30:39', '2026-10-06 15:30:39'),
-(10, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN PARTICIPANTE GASTO', '{\"id\": 1, \"gasto_id\": \"1\", \"created_at\": \"2026-10-07T14:35:34.000000Z\", \"porcentaje\": \"45\", \"updated_at\": \"2026-10-07T14:35:34.000000Z\", \"participante_id\": \"1\"}', NULL, 'PARTICIPANTE GASTOS', '2026-10-07', '10:35:34', '2026-10-07 14:35:34', '2026-10-07 14:35:34'),
-(11, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN PARTICIPANTE GASTO', '{\"id\": 2, \"gasto_id\": \"2\", \"created_at\": \"2026-10-07T14:37:01.000000Z\", \"porcentaje\": \"45\", \"updated_at\": \"2026-10-07T14:37:01.000000Z\", \"participante_id\": \"1\"}', NULL, 'PARTICIPANTE GASTOS', '2026-10-07', '10:37:01', '2026-10-07 14:37:01', '2026-10-07 14:37:01'),
-(12, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN PARTICIPANTE GASTO', '{\"id\": 3, \"gasto_id\": \"4\", \"created_at\": \"2026-10-07T14:37:17.000000Z\", \"porcentaje\": \"45\", \"updated_at\": \"2026-10-07T14:37:17.000000Z\", \"participante_id\": \"1\"}', NULL, 'PARTICIPANTE GASTOS', '2026-10-07', '10:37:18', '2026-10-07 14:37:18', '2026-10-07 14:37:18'),
-(13, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN PARTICIPANTE GASTO', '{\"id\": 4, \"gasto_id\": \"3\", \"created_at\": \"2026-10-07T14:37:53.000000Z\", \"porcentaje\": \"50\", \"updated_at\": \"2026-10-07T14:37:53.000000Z\", \"participante_id\": \"1\"}', NULL, 'PARTICIPANTE GASTOS', '2026-10-07', '10:37:53', '2026-10-07 14:37:53', '2026-10-07 14:37:53'),
-(14, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN PARTICIPANTE GASTO', '{\"id\": 5, \"gasto_id\": \"1\", \"created_at\": \"2026-10-07T14:38:00.000000Z\", \"porcentaje\": \"25\", \"updated_at\": \"2026-10-07T14:38:00.000000Z\", \"participante_id\": \"2\"}', NULL, 'PARTICIPANTE GASTOS', '2026-10-07', '10:38:00', '2026-10-07 14:38:00', '2026-10-07 14:38:00'),
-(15, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN PARTICIPANTE GASTO', '{\"id\": 6, \"gasto_id\": \"2\", \"created_at\": \"2026-10-07T14:38:09.000000Z\", \"porcentaje\": \"25\", \"updated_at\": \"2026-10-07T14:38:09.000000Z\", \"participante_id\": \"2\"}', NULL, 'PARTICIPANTE GASTOS', '2026-10-07', '10:38:09', '2026-10-07 14:38:09', '2026-10-07 14:38:09'),
-(16, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN PARTICIPANTE GASTO', '{\"id\": 7, \"gasto_id\": \"4\", \"created_at\": \"2026-10-07T14:38:24.000000Z\", \"porcentaje\": \"25\", \"updated_at\": \"2026-10-07T14:38:24.000000Z\", \"participante_id\": \"2\"}', NULL, 'PARTICIPANTE GASTOS', '2026-10-07', '10:38:24', '2026-10-07 14:38:24', '2026-10-07 14:38:24'),
-(17, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN PARTICIPANTE GASTO', '{\"id\": 8, \"gasto_id\": \"5\", \"created_at\": \"2026-10-07T14:38:38.000000Z\", \"porcentaje\": \"100\", \"updated_at\": \"2026-10-07T14:38:38.000000Z\", \"participante_id\": \"2\"}', NULL, 'PARTICIPANTE GASTOS', '2026-10-07', '10:38:38', '2026-10-07 14:38:38', '2026-10-07 14:38:38'),
-(18, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN PARTICIPANTE GASTO', '{\"id\": 9, \"gasto_id\": \"5\", \"created_at\": \"2026-10-07T14:38:45.000000Z\", \"porcentaje\": \"0\", \"updated_at\": \"2026-10-07T14:38:45.000000Z\", \"participante_id\": \"1\"}', NULL, 'PARTICIPANTE GASTOS', '2026-10-07', '10:38:45', '2026-10-07 14:38:45', '2026-10-07 14:38:45'),
-(19, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN PARTICIPANTE GASTO', '{\"id\": 10, \"gasto_id\": \"1\", \"created_at\": \"2026-10-07T14:38:55.000000Z\", \"porcentaje\": \"30\", \"updated_at\": \"2026-10-07T14:38:55.000000Z\", \"participante_id\": \"3\"}', NULL, 'PARTICIPANTE GASTOS', '2026-10-07', '10:38:55', '2026-10-07 14:38:55', '2026-10-07 14:38:55'),
-(20, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN PARTICIPANTE GASTO', '{\"id\": 11, \"gasto_id\": \"2\", \"created_at\": \"2026-10-07T14:39:03.000000Z\", \"porcentaje\": \"30\", \"updated_at\": \"2026-10-07T14:39:03.000000Z\", \"participante_id\": \"3\"}', NULL, 'PARTICIPANTE GASTOS', '2026-10-07', '10:39:03', '2026-10-07 14:39:03', '2026-10-07 14:39:03'),
-(21, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN PARTICIPANTE GASTO', '{\"id\": 12, \"gasto_id\": \"4\", \"created_at\": \"2026-10-07T14:39:13.000000Z\", \"porcentaje\": \"30\", \"updated_at\": \"2026-10-07T14:39:13.000000Z\", \"participante_id\": \"3\"}', NULL, 'PARTICIPANTE GASTOS', '2026-10-07', '10:39:13', '2026-10-07 14:39:13', '2026-10-07 14:39:13'),
-(22, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN PARTICIPANTE GASTO', '{\"id\": 13, \"gasto_id\": \"5\", \"created_at\": \"2026-10-07T14:39:39.000000Z\", \"porcentaje\": \"0\", \"updated_at\": \"2026-10-07T14:39:39.000000Z\", \"participante_id\": \"3\"}', NULL, 'PARTICIPANTE GASTOS', '2026-10-07', '10:39:39', '2026-10-07 14:39:39', '2026-10-07 14:39:39'),
-(23, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN PARTICIPANTE GASTO', '{\"id\": 14, \"gasto_id\": \"3\", \"created_at\": \"2026-10-07T14:39:48.000000Z\", \"porcentaje\": \"50\", \"updated_at\": \"2026-10-07T14:39:48.000000Z\", \"participante_id\": \"3\"}', NULL, 'PARTICIPANTE GASTOS', '2026-10-07', '10:39:48', '2026-10-07 14:39:48', '2026-10-07 14:39:48'),
-(24, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN PARTICIPANTE GASTO', '{\"id\": 15, \"gasto_id\": \"3\", \"created_at\": \"2026-10-07T14:43:06.000000Z\", \"porcentaje\": \"0\", \"updated_at\": \"2026-10-07T14:43:06.000000Z\", \"participante_id\": \"2\"}', NULL, 'PARTICIPANTE GASTOS', '2026-10-07', '10:43:06', '2026-10-07 14:43:06', '2026-10-07 14:43:06'),
-(25, 1, 'MODIFICACIÓN', 'EL USUARIO admin ACTUALIZÓ UN PARTICIPANTE', '{\"id\": 1, \"correo\": \"juanpablo@gmail.com\", \"nombre\": \"JUAN PABLO\", \"created_at\": \"2026-10-06T15:02:20.000000Z\", \"updated_at\": \"2026-10-06T15:02:20.000000Z\", \"descripcion\": \"\"}', '{\"id\": 1, \"correo\": \"juanpablochurac@gmail.com\", \"nombre\": \"JUAN PABLO\", \"created_at\": \"2026-10-06T15:02:20.000000Z\", \"updated_at\": \"2026-10-07T18:26:58.000000Z\", \"descripcion\": \"\"}', 'PARTICIPANTES', '2026-10-07', '14:26:58', '2026-10-07 18:26:59', '2026-10-07 18:26:59');
+(1, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN PAGO', '{\"id\": 1, \"mes\": \"08\", \"anio\": \"2026\", \"total\": \"354.18\", \"created_at\": \"2026-10-14T14:07:45.000000Z\", \"updated_at\": \"2026-10-14T14:07:45.000000Z\", \"pago_detalles\": [{\"id\": 1, \"fecha\": null, \"monto\": \"145.30\", \"fecha_t\": \"\", \"pago_id\": 1, \"gasto_id\": 1, \"created_at\": \"2026-10-14T14:07:45.000000Z\", \"updated_at\": \"2026-10-14T14:07:45.000000Z\"}, {\"id\": 2, \"fecha\": null, \"monto\": \"28.00\", \"fecha_t\": \"\", \"pago_id\": 1, \"gasto_id\": 2, \"created_at\": \"2026-10-14T14:07:45.000000Z\", \"updated_at\": \"2026-10-14T14:07:45.000000Z\"}, {\"id\": 3, \"fecha\": null, \"monto\": \"149.00\", \"fecha_t\": \"\", \"pago_id\": 1, \"gasto_id\": 3, \"created_at\": \"2026-10-14T14:07:45.000000Z\", \"updated_at\": \"2026-10-14T14:07:45.000000Z\"}, {\"id\": 4, \"fecha\": null, \"monto\": \"22.90\", \"fecha_t\": \"\", \"pago_id\": 1, \"gasto_id\": 4, \"created_at\": \"2026-10-14T14:07:45.000000Z\", \"updated_at\": \"2026-10-14T14:07:45.000000Z\"}, {\"id\": 5, \"fecha\": null, \"monto\": \"8.98\", \"fecha_t\": \"\", \"pago_id\": 1, \"gasto_id\": 5, \"created_at\": \"2026-10-14T14:07:45.000000Z\", \"updated_at\": \"2026-10-14T14:07:45.000000Z\"}], \"pago_participantes\": [{\"id\": 1, \"total\": \"133.36\", \"estado\": \"PENDIENTE\", \"pago_id\": 1, \"created_at\": \"2026-10-14T14:07:45.000000Z\", \"updated_at\": \"2026-10-14T14:07:45.000000Z\", \"correo_enviado\": 0, \"participante_id\": 3}, {\"id\": 2, \"total\": \"58.03\", \"estado\": \"PENDIENTE\", \"pago_id\": 1, \"created_at\": \"2026-10-14T14:07:45.000000Z\", \"updated_at\": \"2026-10-14T14:07:45.000000Z\", \"correo_enviado\": 0, \"participante_id\": 2}, {\"id\": 3, \"total\": \"162.79\", \"estado\": \"PENDIENTE\", \"pago_id\": 1, \"created_at\": \"2026-10-14T14:07:45.000000Z\", \"updated_at\": \"2026-10-14T14:07:45.000000Z\", \"correo_enviado\": 0, \"participante_id\": 1}]}', NULL, 'PAGOS', '2026-10-14', '10:07:45', '2026-10-14 14:07:45', '2026-10-14 14:07:45'),
+(2, 1, 'MODIFICACIÓN', 'EL USUARIO admin ACTUALIZÓ UN PARTICIPANTE', '{\"id\": 2, \"correo\": \"jhuinz1313@gmail.com\", \"nombre\": \"EDWIN\", \"created_at\": \"2026-10-06T15:02:30.000000Z\", \"updated_at\": \"2026-10-13T15:37:21.000000Z\", \"descripcion\": \"\"}', '{\"id\": 2, \"correo\": \"jhuinz1313x@gmail.com\", \"nombre\": \"EDWIN\", \"created_at\": \"2026-10-06T15:02:30.000000Z\", \"updated_at\": \"2026-10-14T14:08:08.000000Z\", \"descripcion\": \"\"}', 'PARTICIPANTES', '2026-10-14', '10:08:08', '2026-10-14 14:08:08', '2026-10-14 14:08:08'),
+(3, 1, 'MODIFICACIÓN', 'EL USUARIO admin ACTUALIZÓ UN PARTICIPANTE', '{\"id\": 1, \"correo\": \"juanpablochurac@gmail.com\", \"nombre\": \"JUAN PABLO\", \"created_at\": \"2026-10-06T15:02:20.000000Z\", \"updated_at\": \"2026-10-07T19:53:52.000000Z\", \"descripcion\": \"\"}', '{\"id\": 1, \"correo\": \"juanpablochuracx@gmail.com\", \"nombre\": \"JUAN PABLO\", \"created_at\": \"2026-10-06T15:02:20.000000Z\", \"updated_at\": \"2026-10-14T14:08:16.000000Z\", \"descripcion\": \"\"}', 'PARTICIPANTES', '2026-10-14', '10:08:16', '2026-10-14 14:08:16', '2026-10-14 14:08:16'),
+(4, 1, 'MODIFICACIÓN', 'EL USUARIO admin ACTUALIZÓ UN PAGO', '{\"id\": 1, \"mes\": \"08\", \"anio\": 2026, \"total\": \"354.18\", \"estado\": \"PENDIENTE\", \"created_at\": \"2026-10-14T14:07:45.000000Z\", \"updated_at\": \"2026-10-14T14:07:45.000000Z\", \"fecha_registro\": null}', '{\"id\": 1, \"mes\": \"08\", \"anio\": \"2026\", \"total\": \"405.18\", \"estado\": \"PENDIENTE\", \"created_at\": \"2026-10-14T14:07:45.000000Z\", \"updated_at\": \"2026-10-14T14:10:11.000000Z\", \"fecha_registro\": null}', 'PAGOS', '2026-10-14', '10:10:11', '2026-10-14 14:10:11', '2026-10-14 14:10:11'),
+(5, 1, 'MODIFICACIÓN', 'EL USUARIO admin ACTUALIZÓ UN PARTICIPANTE', '{\"id\": 2, \"correo\": \"jhuinz1313x@gmail.com\", \"nombre\": \"EDWIN\", \"created_at\": \"2026-10-06T15:02:30.000000Z\", \"updated_at\": \"2026-10-14T14:08:08.000000Z\", \"descripcion\": \"\"}', '{\"id\": 2, \"correo\": \"jhuinz1313@gmail.com\", \"nombre\": \"EDWIN\", \"created_at\": \"2026-10-06T15:02:30.000000Z\", \"updated_at\": \"2026-10-14T14:11:26.000000Z\", \"descripcion\": \"\"}', 'PARTICIPANTES', '2026-10-14', '10:11:26', '2026-10-14 14:11:26', '2026-10-14 14:11:26'),
+(6, 1, 'MODIFICACIÓN', 'EL USUARIO admin ACTUALIZÓ UN PARTICIPANTE', '{\"id\": 1, \"correo\": \"juanpablochuracx@gmail.com\", \"nombre\": \"JUAN PABLO\", \"created_at\": \"2026-10-06T15:02:20.000000Z\", \"updated_at\": \"2026-10-14T14:08:16.000000Z\", \"descripcion\": \"\"}', '{\"id\": 1, \"correo\": \"juanpablochurac@gmail.com\", \"nombre\": \"JUAN PABLO\", \"created_at\": \"2026-10-06T15:02:20.000000Z\", \"updated_at\": \"2026-10-14T14:11:33.000000Z\", \"descripcion\": \"\"}', 'PARTICIPANTES', '2026-10-14', '10:11:33', '2026-10-14 14:11:33', '2026-10-14 14:11:33'),
+(7, 1, 'MODIFICACIÓN', 'EL USUARIO admin ACTUALIZÓ UN PAGO', '{\"id\": 1, \"mes\": \"08\", \"anio\": 2026, \"total\": \"405.18\", \"estado\": \"PENDIENTE\", \"created_at\": \"2026-10-14T14:07:45.000000Z\", \"updated_at\": \"2026-10-14T14:10:11.000000Z\", \"fecha_registro\": null}', '{\"id\": 1, \"mes\": \"08\", \"anio\": \"2026\", \"total\": \"354.18\", \"estado\": \"PENDIENTE\", \"created_at\": \"2026-10-14T14:07:45.000000Z\", \"updated_at\": \"2026-10-14T14:11:51.000000Z\", \"fecha_registro\": null}', 'PAGOS', '2026-10-14', '10:11:51', '2026-10-14 14:11:51', '2026-10-14 14:11:51');
 
 -- --------------------------------------------------------
 
@@ -176,7 +158,7 @@ CREATE TABLE `pagos` (
 --
 
 INSERT INTO `pagos` (`id`, `mes`, `anio`, `total`, `estado`, `fecha_registro`, `created_at`, `updated_at`) VALUES
-(1, '08', 2026, 354.18, 'PENDIENTE', '2026-10-06', '2026-10-06 15:30:39', '2026-10-06 15:30:39');
+(1, '08', 2026, 354.18, 'PENDIENTE', NULL, '2026-10-14 14:07:45', '2026-10-14 14:11:51');
 
 -- --------------------------------------------------------
 
@@ -199,11 +181,11 @@ CREATE TABLE `pago_detalles` (
 --
 
 INSERT INTO `pago_detalles` (`id`, `pago_id`, `gasto_id`, `monto`, `fecha`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, 145.30, NULL, '2026-10-06 15:30:39', '2026-10-06 15:30:39'),
-(2, 1, 2, 28.00, NULL, '2026-10-06 15:30:39', '2026-10-06 15:30:39'),
-(3, 1, 3, 149.00, NULL, '2026-10-06 15:30:39', '2026-10-06 15:30:39'),
-(4, 1, 4, 22.90, NULL, '2026-10-06 15:30:39', '2026-10-06 15:30:39'),
-(5, 1, 5, 8.98, NULL, '2026-10-06 15:30:39', '2026-10-06 15:30:39');
+(1, 1, 1, 145.30, NULL, '2026-10-14 14:07:45', '2026-10-14 14:07:45'),
+(2, 1, 2, 28.00, NULL, '2026-10-14 14:07:45', '2026-10-14 14:07:45'),
+(3, 1, 3, 149.00, NULL, '2026-10-14 14:07:45', '2026-10-14 14:11:51'),
+(4, 1, 4, 22.90, NULL, '2026-10-14 14:07:45', '2026-10-14 14:07:45'),
+(5, 1, 5, 8.98, NULL, '2026-10-14 14:07:45', '2026-10-14 14:07:45');
 
 -- --------------------------------------------------------
 
@@ -230,21 +212,21 @@ CREATE TABLE `pago_gastos` (
 --
 
 INSERT INTO `pago_gastos` (`id`, `pago_id`, `pago_detalle_id`, `participante_id`, `pago_participante_id`, `gasto_id`, `porcentaje_pago`, `monto_pagado`, `estado`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, 1, 1, 1, 45.00000000, 65.39, 'PENDIENTE', '2026-10-07 14:43:17', '2026-10-07 14:43:17'),
-(2, 1, 2, 1, 1, 2, 45.00000000, 12.60, 'PENDIENTE', '2026-10-07 14:43:17', '2026-10-07 14:43:17'),
-(3, 1, 3, 1, 1, 3, 50.00000000, 74.50, 'PENDIENTE', '2026-10-07 14:43:17', '2026-10-07 14:43:17'),
-(4, 1, 4, 1, 1, 4, 45.00000000, 10.31, 'PENDIENTE', '2026-10-07 14:43:17', '2026-10-07 14:43:17'),
-(5, 1, 5, 1, 1, 5, 0.00000000, 0.00, 'PENDIENTE', '2026-10-07 14:43:17', '2026-10-07 14:43:17'),
-(6, 1, 1, 2, 2, 1, 25.00000000, 36.33, 'PENDIENTE', '2026-10-07 14:43:17', '2026-10-07 14:43:17'),
-(7, 1, 2, 2, 2, 2, 25.00000000, 7.00, 'PENDIENTE', '2026-10-07 14:43:17', '2026-10-07 14:43:17'),
-(8, 1, 3, 2, 2, 3, 0.00000000, 0.00, 'PENDIENTE', '2026-10-07 14:43:17', '2026-10-07 14:43:17'),
-(9, 1, 4, 2, 2, 4, 25.00000000, 5.73, 'PENDIENTE', '2026-10-07 14:43:17', '2026-10-07 14:43:17'),
-(10, 1, 5, 2, 2, 5, 100.00000000, 8.98, 'PENDIENTE', '2026-10-07 14:43:17', '2026-10-07 14:43:17'),
-(11, 1, 1, 3, 3, 1, 30.00000000, 43.59, 'PENDIENTE', '2026-10-07 14:43:17', '2026-10-07 14:43:17'),
-(12, 1, 2, 3, 3, 2, 30.00000000, 8.40, 'PENDIENTE', '2026-10-07 14:43:17', '2026-10-07 14:43:17'),
-(13, 1, 3, 3, 3, 3, 50.00000000, 74.50, 'PENDIENTE', '2026-10-07 14:43:17', '2026-10-07 14:43:17'),
-(14, 1, 4, 3, 3, 4, 30.00000000, 6.87, 'PENDIENTE', '2026-10-07 14:43:17', '2026-10-07 14:43:17'),
-(15, 1, 5, 3, 3, 5, 0.00000000, 0.00, 'PENDIENTE', '2026-10-07 14:43:17', '2026-10-07 14:43:17');
+(1, 1, 1, 3, 1, 1, 30.00000000, 43.59, 'PENDIENTE', '2026-10-14 14:07:45', '2026-10-14 14:07:45'),
+(2, 1, 2, 3, 1, 2, 30.00000000, 8.40, 'PENDIENTE', '2026-10-14 14:07:45', '2026-10-14 14:11:51'),
+(3, 1, 3, 3, 1, 3, 50.00000000, 74.50, 'PENDIENTE', '2026-10-14 14:07:45', '2026-10-14 14:11:51'),
+(4, 1, 4, 3, 1, 4, 30.00000000, 6.87, 'PENDIENTE', '2026-10-14 14:07:45', '2026-10-14 14:07:45'),
+(5, 1, 5, 3, 1, 5, 0.00000000, 0.00, 'PENDIENTE', '2026-10-14 14:07:45', '2026-10-14 14:11:51'),
+(6, 1, 1, 2, 2, 1, 25.00000000, 36.33, 'PENDIENTE', '2026-10-14 14:07:45', '2026-10-14 14:07:45'),
+(7, 1, 2, 2, 2, 2, 25.00000000, 7.00, 'PENDIENTE', '2026-10-14 14:07:45', '2026-10-14 14:11:51'),
+(8, 1, 3, 2, 2, 3, 0.00000000, 0.00, 'PENDIENTE', '2026-10-14 14:07:45', '2026-10-14 14:11:51'),
+(9, 1, 4, 2, 2, 4, 25.00000000, 5.72, 'PENDIENTE', '2026-10-14 14:07:45', '2026-10-14 14:07:45'),
+(10, 1, 5, 2, 2, 5, 100.00000000, 8.98, 'PENDIENTE', '2026-10-14 14:07:45', '2026-10-14 14:07:45'),
+(11, 1, 1, 1, 3, 1, 45.00000000, 65.39, 'PENDIENTE', '2026-10-14 14:07:45', '2026-10-14 14:07:45'),
+(12, 1, 2, 1, 3, 2, 45.00000000, 12.60, 'PENDIENTE', '2026-10-14 14:07:45', '2026-10-14 14:11:51'),
+(13, 1, 3, 1, 3, 3, 50.00000000, 74.50, 'PENDIENTE', '2026-10-14 14:07:45', '2026-10-14 14:11:51'),
+(14, 1, 4, 1, 3, 4, 45.00000000, 10.30, 'PENDIENTE', '2026-10-14 14:07:45', '2026-10-14 14:11:51'),
+(15, 1, 5, 1, 3, 5, 0.00000000, 0.00, 'PENDIENTE', '2026-10-14 14:07:45', '2026-10-14 14:11:51');
 
 -- --------------------------------------------------------
 
@@ -268,9 +250,9 @@ CREATE TABLE `pago_participantes` (
 --
 
 INSERT INTO `pago_participantes` (`id`, `pago_id`, `participante_id`, `correo_enviado`, `total`, `estado`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, 0, 0.00, 'PENDIENTE', '2026-10-06 15:30:39', '2026-10-07 18:29:38'),
-(2, 1, 2, 0, 0.00, 'PENDIENTE', '2026-10-06 15:30:39', '2026-10-07 18:29:38'),
-(3, 1, 3, 0, 0.00, 'PENDIENTE', '2026-10-06 15:30:39', '2026-10-07 18:29:38');
+(1, 1, 3, 0, 133.36, 'PENDIENTE', '2026-10-14 14:07:45', '2026-10-14 14:11:51'),
+(2, 1, 2, 0, 58.03, 'PENDIENTE', '2026-10-14 14:07:45', '2026-10-14 14:10:50'),
+(3, 1, 1, 0, 162.79, 'PENDIENTE', '2026-10-14 14:07:45', '2026-10-14 14:11:51');
 
 -- --------------------------------------------------------
 
@@ -292,8 +274,8 @@ CREATE TABLE `participantes` (
 --
 
 INSERT INTO `participantes` (`id`, `nombre`, `correo`, `descripcion`, `created_at`, `updated_at`) VALUES
-(1, 'JUAN PABLO', 'juanpablochurac@gmail.com', '', '2026-10-06 15:02:20', '2026-10-07 18:26:58'),
-(2, 'EDWIN', 'edwin@gmail.com', '', '2026-10-06 15:02:30', '2026-10-06 15:02:30'),
+(1, 'JUAN PABLO', 'juanpablochurac@gmail.com', '', '2026-10-06 15:02:20', '2026-10-14 14:11:33'),
+(2, 'EDWIN', 'jhuinz1313@gmail.com', '', '2026-10-06 15:02:30', '2026-10-14 14:11:26'),
 (3, 'GONZALO', 'victorgonzalo.as@gmail.com', '', '2026-10-06 15:02:43', '2026-10-06 15:02:43');
 
 -- --------------------------------------------------------
@@ -471,7 +453,7 @@ ALTER TABLE `gastos`
 -- AUTO_INCREMENT de la tabla `historial_accions`
 --
 ALTER TABLE `historial_accions`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `migrations`

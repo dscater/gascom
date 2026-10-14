@@ -148,7 +148,7 @@
                             <br>
 
                             <small>
-                                {{ number_format($item['gasto']->porcentaje_pago ?? 0, 8) }}%
+                                {{ number_format($item['gasto']->porcentaje_pago ?? 0, 2) }}%
                             </small>
                         </td>
                     @endforeach
