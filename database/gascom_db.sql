@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 14-10-2026 a las 14:18:48
+-- Tiempo de generación: 16-10-2026 a las 14:07:15
 -- Versión del servidor: 8.0.30
 -- Versión de PHP: 8.2.22
 
@@ -29,16 +29,16 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `configuracions` (
   `id` bigint UNSIGNED NOT NULL,
-  `nombre_sistema` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `alias` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `razon_social` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nit` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `dir` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `fono` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `actividad` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `correo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `logo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `qr` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nombre_sistema` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `alias` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `razon_social` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nit` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `dir` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `fono` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `actividad` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `correo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `logo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `qr` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -58,8 +58,8 @@ INSERT INTO `configuracions` (`id`, `nombre_sistema`, `alias`, `razon_social`, `
 
 CREATE TABLE `gastos` (
   `id` bigint UNSIGNED NOT NULL,
-  `nombre` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `descripcion` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nombre` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `descripcion` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -84,11 +84,11 @@ INSERT INTO `gastos` (`id`, `nombre`, `descripcion`, `created_at`, `updated_at`)
 CREATE TABLE `historial_accions` (
   `id` bigint UNSIGNED NOT NULL,
   `user_id` bigint UNSIGNED NOT NULL,
-  `accion` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `descripcion` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `accion` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `descripcion` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `datos_original` json DEFAULT NULL,
   `datos_nuevo` json DEFAULT NULL,
-  `modulo` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `modulo` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `fecha` date NOT NULL,
   `hora` time NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -106,7 +106,10 @@ INSERT INTO `historial_accions` (`id`, `user_id`, `accion`, `descripcion`, `dato
 (4, 1, 'MODIFICACIÓN', 'EL USUARIO admin ACTUALIZÓ UN PAGO', '{\"id\": 1, \"mes\": \"08\", \"anio\": 2026, \"total\": \"354.18\", \"estado\": \"PENDIENTE\", \"created_at\": \"2026-10-14T14:07:45.000000Z\", \"updated_at\": \"2026-10-14T14:07:45.000000Z\", \"fecha_registro\": null}', '{\"id\": 1, \"mes\": \"08\", \"anio\": \"2026\", \"total\": \"405.18\", \"estado\": \"PENDIENTE\", \"created_at\": \"2026-10-14T14:07:45.000000Z\", \"updated_at\": \"2026-10-14T14:10:11.000000Z\", \"fecha_registro\": null}', 'PAGOS', '2026-10-14', '10:10:11', '2026-10-14 14:10:11', '2026-10-14 14:10:11'),
 (5, 1, 'MODIFICACIÓN', 'EL USUARIO admin ACTUALIZÓ UN PARTICIPANTE', '{\"id\": 2, \"correo\": \"jhuinz1313x@gmail.com\", \"nombre\": \"EDWIN\", \"created_at\": \"2026-10-06T15:02:30.000000Z\", \"updated_at\": \"2026-10-14T14:08:08.000000Z\", \"descripcion\": \"\"}', '{\"id\": 2, \"correo\": \"jhuinz1313@gmail.com\", \"nombre\": \"EDWIN\", \"created_at\": \"2026-10-06T15:02:30.000000Z\", \"updated_at\": \"2026-10-14T14:11:26.000000Z\", \"descripcion\": \"\"}', 'PARTICIPANTES', '2026-10-14', '10:11:26', '2026-10-14 14:11:26', '2026-10-14 14:11:26'),
 (6, 1, 'MODIFICACIÓN', 'EL USUARIO admin ACTUALIZÓ UN PARTICIPANTE', '{\"id\": 1, \"correo\": \"juanpablochuracx@gmail.com\", \"nombre\": \"JUAN PABLO\", \"created_at\": \"2026-10-06T15:02:20.000000Z\", \"updated_at\": \"2026-10-14T14:08:16.000000Z\", \"descripcion\": \"\"}', '{\"id\": 1, \"correo\": \"juanpablochurac@gmail.com\", \"nombre\": \"JUAN PABLO\", \"created_at\": \"2026-10-06T15:02:20.000000Z\", \"updated_at\": \"2026-10-14T14:11:33.000000Z\", \"descripcion\": \"\"}', 'PARTICIPANTES', '2026-10-14', '10:11:33', '2026-10-14 14:11:33', '2026-10-14 14:11:33'),
-(7, 1, 'MODIFICACIÓN', 'EL USUARIO admin ACTUALIZÓ UN PAGO', '{\"id\": 1, \"mes\": \"08\", \"anio\": 2026, \"total\": \"405.18\", \"estado\": \"PENDIENTE\", \"created_at\": \"2026-10-14T14:07:45.000000Z\", \"updated_at\": \"2026-10-14T14:10:11.000000Z\", \"fecha_registro\": null}', '{\"id\": 1, \"mes\": \"08\", \"anio\": \"2026\", \"total\": \"354.18\", \"estado\": \"PENDIENTE\", \"created_at\": \"2026-10-14T14:07:45.000000Z\", \"updated_at\": \"2026-10-14T14:11:51.000000Z\", \"fecha_registro\": null}', 'PAGOS', '2026-10-14', '10:11:51', '2026-10-14 14:11:51', '2026-10-14 14:11:51');
+(7, 1, 'MODIFICACIÓN', 'EL USUARIO admin ACTUALIZÓ UN PAGO', '{\"id\": 1, \"mes\": \"08\", \"anio\": 2026, \"total\": \"405.18\", \"estado\": \"PENDIENTE\", \"created_at\": \"2026-10-14T14:07:45.000000Z\", \"updated_at\": \"2026-10-14T14:10:11.000000Z\", \"fecha_registro\": null}', '{\"id\": 1, \"mes\": \"08\", \"anio\": \"2026\", \"total\": \"354.18\", \"estado\": \"PENDIENTE\", \"created_at\": \"2026-10-14T14:07:45.000000Z\", \"updated_at\": \"2026-10-14T14:11:51.000000Z\", \"fecha_registro\": null}', 'PAGOS', '2026-10-14', '10:11:51', '2026-10-14 14:11:51', '2026-10-14 14:11:51'),
+(8, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN PAGO', '{\"id\": 2, \"mes\": \"09\", \"anio\": \"2026\", \"total\": \"428.49\", \"created_at\": \"2026-10-16T14:04:03.000000Z\", \"updated_at\": \"2026-10-16T14:04:03.000000Z\", \"pago_detalles\": [{\"id\": 6, \"fecha\": null, \"monto\": \"145.40\", \"fecha_t\": \"\", \"pago_id\": 2, \"gasto_id\": 1, \"created_at\": \"2026-10-16T14:04:03.000000Z\", \"updated_at\": \"2026-10-16T14:04:03.000000Z\"}, {\"id\": 7, \"fecha\": null, \"monto\": \"103.50\", \"fecha_t\": \"\", \"pago_id\": 2, \"gasto_id\": 2, \"created_at\": \"2026-10-16T14:04:03.000000Z\", \"updated_at\": \"2026-10-16T14:04:03.000000Z\"}, {\"id\": 8, \"fecha\": null, \"monto\": \"149.00\", \"fecha_t\": \"\", \"pago_id\": 2, \"gasto_id\": 3, \"created_at\": \"2026-10-16T14:04:03.000000Z\", \"updated_at\": \"2026-10-16T14:04:03.000000Z\"}, {\"id\": 9, \"fecha\": null, \"monto\": \"21.61\", \"fecha_t\": \"\", \"pago_id\": 2, \"gasto_id\": 4, \"created_at\": \"2026-10-16T14:04:03.000000Z\", \"updated_at\": \"2026-10-16T14:04:03.000000Z\"}, {\"id\": 10, \"fecha\": null, \"monto\": \"8.98\", \"fecha_t\": \"\", \"pago_id\": 2, \"gasto_id\": 5, \"created_at\": \"2026-10-16T14:04:03.000000Z\", \"updated_at\": \"2026-10-16T14:04:03.000000Z\"}], \"pago_participantes\": [{\"id\": 4, \"total\": \"196.23\", \"estado\": \"PENDIENTE\", \"pago_id\": 2, \"created_at\": \"2026-10-16T14:04:03.000000Z\", \"updated_at\": \"2026-10-16T14:04:03.000000Z\", \"correo_enviado\": 0, \"participante_id\": 1}, {\"id\": 5, \"total\": \"155.65\", \"estado\": \"PENDIENTE\", \"pago_id\": 2, \"created_at\": \"2026-10-16T14:04:03.000000Z\", \"updated_at\": \"2026-10-16T14:04:03.000000Z\", \"correo_enviado\": 0, \"participante_id\": 3}, {\"id\": 6, \"total\": \"76.61\", \"estado\": \"PENDIENTE\", \"pago_id\": 2, \"created_at\": \"2026-10-16T14:04:03.000000Z\", \"updated_at\": \"2026-10-16T14:04:03.000000Z\", \"correo_enviado\": 0, \"participante_id\": 2}]}', NULL, 'PAGOS', '2026-10-16', '10:04:03', '2026-10-16 14:04:03', '2026-10-16 14:04:03'),
+(9, 1, 'MODIFICACIÓN', 'EL USUARIO admin ACTUALIZÓ UN PARTICIPANTE', '{\"id\": 1, \"correo\": \"juanpablochurac@gmail.com\", \"nombre\": \"JUAN PABLO\", \"created_at\": \"2026-10-06T15:02:20.000000Z\", \"updated_at\": \"2026-10-14T14:11:33.000000Z\", \"descripcion\": \"\"}', '{\"id\": 1, \"correo\": \"juanpablochuracx@gmail.com\", \"nombre\": \"JUAN PABLO\", \"created_at\": \"2026-10-06T15:02:20.000000Z\", \"updated_at\": \"2026-10-16T14:06:02.000000Z\", \"descripcion\": \"\"}', 'PARTICIPANTES', '2026-10-16', '10:06:02', '2026-10-16 14:06:02', '2026-10-16 14:06:02'),
+(10, 1, 'MODIFICACIÓN', 'EL USUARIO admin ACTUALIZÓ UN PARTICIPANTE', '{\"id\": 1, \"correo\": \"juanpablochuracx@gmail.com\", \"nombre\": \"JUAN PABLO\", \"created_at\": \"2026-10-06T15:02:20.000000Z\", \"updated_at\": \"2026-10-16T14:06:02.000000Z\", \"descripcion\": \"\"}', '{\"id\": 1, \"correo\": \"juanpablochurac@gmail.com\", \"nombre\": \"JUAN PABLO\", \"created_at\": \"2026-10-06T15:02:20.000000Z\", \"updated_at\": \"2026-10-16T14:07:06.000000Z\", \"descripcion\": \"\"}', 'PARTICIPANTES', '2026-10-16', '10:07:06', '2026-10-16 14:07:06', '2026-10-16 14:07:06');
 
 -- --------------------------------------------------------
 
@@ -116,7 +119,7 @@ INSERT INTO `historial_accions` (`id`, `user_id`, `accion`, `descripcion`, `dato
 
 CREATE TABLE `migrations` (
   `id` int UNSIGNED NOT NULL,
-  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `migration` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -144,10 +147,10 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 
 CREATE TABLE `pagos` (
   `id` bigint UNSIGNED NOT NULL,
-  `mes` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `mes` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `anio` int NOT NULL,
   `total` decimal(24,2) DEFAULT NULL,
-  `estado` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'PENDIENTE',
+  `estado` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'PENDIENTE',
   `fecha_registro` date DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -158,7 +161,8 @@ CREATE TABLE `pagos` (
 --
 
 INSERT INTO `pagos` (`id`, `mes`, `anio`, `total`, `estado`, `fecha_registro`, `created_at`, `updated_at`) VALUES
-(1, '08', 2026, 354.18, 'PENDIENTE', NULL, '2026-10-14 14:07:45', '2026-10-14 14:11:51');
+(1, '08', 2026, 354.18, 'PENDIENTE', NULL, '2026-10-14 14:07:45', '2026-10-14 14:11:51'),
+(2, '09', 2026, 428.49, 'PENDIENTE', NULL, '2026-10-16 14:04:03', '2026-10-16 14:04:03');
 
 -- --------------------------------------------------------
 
@@ -185,7 +189,12 @@ INSERT INTO `pago_detalles` (`id`, `pago_id`, `gasto_id`, `monto`, `fecha`, `cre
 (2, 1, 2, 28.00, NULL, '2026-10-14 14:07:45', '2026-10-14 14:07:45'),
 (3, 1, 3, 149.00, NULL, '2026-10-14 14:07:45', '2026-10-14 14:11:51'),
 (4, 1, 4, 22.90, NULL, '2026-10-14 14:07:45', '2026-10-14 14:07:45'),
-(5, 1, 5, 8.98, NULL, '2026-10-14 14:07:45', '2026-10-14 14:07:45');
+(5, 1, 5, 8.98, NULL, '2026-10-14 14:07:45', '2026-10-14 14:07:45'),
+(6, 2, 1, 145.40, NULL, '2026-10-16 14:04:03', '2026-10-16 14:04:03'),
+(7, 2, 2, 103.50, NULL, '2026-10-16 14:04:03', '2026-10-16 14:04:03'),
+(8, 2, 3, 149.00, NULL, '2026-10-16 14:04:03', '2026-10-16 14:04:03'),
+(9, 2, 4, 21.61, NULL, '2026-10-16 14:04:03', '2026-10-16 14:04:03'),
+(10, 2, 5, 8.98, NULL, '2026-10-16 14:04:03', '2026-10-16 14:04:03');
 
 -- --------------------------------------------------------
 
@@ -202,7 +211,7 @@ CREATE TABLE `pago_gastos` (
   `gasto_id` bigint UNSIGNED NOT NULL,
   `porcentaje_pago` double(11,8) NOT NULL DEFAULT '0.00000000',
   `monto_pagado` decimal(24,2) NOT NULL DEFAULT '0.00',
-  `estado` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'PENDIENTE',
+  `estado` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'PENDIENTE',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -226,7 +235,22 @@ INSERT INTO `pago_gastos` (`id`, `pago_id`, `pago_detalle_id`, `participante_id`
 (12, 1, 2, 1, 3, 2, 45.00000000, 12.60, 'PENDIENTE', '2026-10-14 14:07:45', '2026-10-14 14:11:51'),
 (13, 1, 3, 1, 3, 3, 50.00000000, 74.50, 'PENDIENTE', '2026-10-14 14:07:45', '2026-10-14 14:11:51'),
 (14, 1, 4, 1, 3, 4, 45.00000000, 10.30, 'PENDIENTE', '2026-10-14 14:07:45', '2026-10-14 14:11:51'),
-(15, 1, 5, 1, 3, 5, 0.00000000, 0.00, 'PENDIENTE', '2026-10-14 14:07:45', '2026-10-14 14:11:51');
+(15, 1, 5, 1, 3, 5, 0.00000000, 0.00, 'PENDIENTE', '2026-10-14 14:07:45', '2026-10-14 14:11:51'),
+(16, 2, 6, 1, 4, 1, 45.00000000, 65.43, 'PENDIENTE', '2026-10-16 14:04:03', '2026-10-16 14:04:03'),
+(17, 2, 7, 1, 4, 2, 45.00000000, 46.58, 'PENDIENTE', '2026-10-16 14:04:03', '2026-10-16 14:04:03'),
+(18, 2, 8, 1, 4, 3, 50.00000000, 74.50, 'PENDIENTE', '2026-10-16 14:04:03', '2026-10-16 14:04:03'),
+(19, 2, 9, 1, 4, 4, 45.00000000, 9.72, 'PENDIENTE', '2026-10-16 14:04:03', '2026-10-16 14:04:03'),
+(20, 2, 10, 1, 4, 5, 0.00000000, 0.00, 'PENDIENTE', '2026-10-16 14:04:03', '2026-10-16 14:04:03'),
+(21, 2, 6, 3, 5, 1, 30.00000000, 43.62, 'PENDIENTE', '2026-10-16 14:04:03', '2026-10-16 14:04:03'),
+(22, 2, 7, 3, 5, 2, 30.00000000, 31.05, 'PENDIENTE', '2026-10-16 14:04:03', '2026-10-16 14:04:03'),
+(23, 2, 8, 3, 5, 3, 50.00000000, 74.50, 'PENDIENTE', '2026-10-16 14:04:03', '2026-10-16 14:04:03'),
+(24, 2, 9, 3, 5, 4, 30.00000000, 6.48, 'PENDIENTE', '2026-10-16 14:04:03', '2026-10-16 14:04:03'),
+(25, 2, 10, 3, 5, 5, 0.00000000, 0.00, 'PENDIENTE', '2026-10-16 14:04:03', '2026-10-16 14:04:03'),
+(26, 2, 6, 2, 6, 1, 25.00000000, 36.35, 'PENDIENTE', '2026-10-16 14:04:03', '2026-10-16 14:04:03'),
+(27, 2, 7, 2, 6, 2, 25.00000000, 25.88, 'PENDIENTE', '2026-10-16 14:04:03', '2026-10-16 14:04:03'),
+(28, 2, 8, 2, 6, 3, 0.00000000, 0.00, 'PENDIENTE', '2026-10-16 14:04:03', '2026-10-16 14:04:03'),
+(29, 2, 9, 2, 6, 4, 25.00000000, 5.40, 'PENDIENTE', '2026-10-16 14:04:03', '2026-10-16 14:04:03'),
+(30, 2, 10, 2, 6, 5, 100.00000000, 8.98, 'PENDIENTE', '2026-10-16 14:04:03', '2026-10-16 14:04:03');
 
 -- --------------------------------------------------------
 
@@ -240,7 +264,7 @@ CREATE TABLE `pago_participantes` (
   `participante_id` bigint UNSIGNED NOT NULL,
   `correo_enviado` tinyint(1) NOT NULL DEFAULT '0',
   `total` decimal(24,2) NOT NULL DEFAULT '0.00',
-  `estado` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'PENDIENTE',
+  `estado` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'PENDIENTE',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -250,9 +274,12 @@ CREATE TABLE `pago_participantes` (
 --
 
 INSERT INTO `pago_participantes` (`id`, `pago_id`, `participante_id`, `correo_enviado`, `total`, `estado`, `created_at`, `updated_at`) VALUES
-(1, 1, 3, 0, 133.36, 'PENDIENTE', '2026-10-14 14:07:45', '2026-10-14 14:11:51'),
-(2, 1, 2, 0, 58.03, 'PENDIENTE', '2026-10-14 14:07:45', '2026-10-14 14:10:50'),
-(3, 1, 1, 0, 162.79, 'PENDIENTE', '2026-10-14 14:07:45', '2026-10-14 14:11:51');
+(1, 1, 3, 0, 133.36, 'PENDIENTE', '2026-10-14 14:07:45', '2026-10-16 14:00:43'),
+(2, 1, 2, 0, 58.03, 'PENDIENTE', '2026-10-14 14:07:45', '2026-10-16 14:00:43'),
+(3, 1, 1, 0, 162.79, 'PENDIENTE', '2026-10-14 14:07:45', '2026-10-16 14:00:43'),
+(4, 2, 1, 0, 196.23, 'PENDIENTE', '2026-10-16 14:04:03', '2026-10-16 14:06:13'),
+(5, 2, 3, 0, 155.65, 'PENDIENTE', '2026-10-16 14:04:03', '2026-10-16 14:06:13'),
+(6, 2, 2, 0, 76.61, 'PENDIENTE', '2026-10-16 14:04:03', '2026-10-16 14:06:13');
 
 -- --------------------------------------------------------
 
@@ -262,9 +289,9 @@ INSERT INTO `pago_participantes` (`id`, `pago_id`, `participante_id`, `correo_en
 
 CREATE TABLE `participantes` (
   `id` bigint UNSIGNED NOT NULL,
-  `nombre` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `correo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `descripcion` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nombre` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `correo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `descripcion` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -274,7 +301,7 @@ CREATE TABLE `participantes` (
 --
 
 INSERT INTO `participantes` (`id`, `nombre`, `correo`, `descripcion`, `created_at`, `updated_at`) VALUES
-(1, 'JUAN PABLO', 'juanpablochurac@gmail.com', '', '2026-10-06 15:02:20', '2026-10-14 14:11:33'),
+(1, 'JUAN PABLO', 'juanpablochurac@gmail.com', '', '2026-10-06 15:02:20', '2026-10-16 14:07:06'),
 (2, 'EDWIN', 'jhuinz1313@gmail.com', '', '2026-10-06 15:02:30', '2026-10-14 14:11:26'),
 (3, 'GONZALO', 'victorgonzalo.as@gmail.com', '', '2026-10-06 15:02:43', '2026-10-06 15:02:43');
 
@@ -322,19 +349,19 @@ INSERT INTO `participante_gastos` (`id`, `participante_id`, `gasto_id`, `porcent
 
 CREATE TABLE `users` (
   `id` bigint UNSIGNED NOT NULL,
-  `usuario` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nombre` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `paterno` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `materno` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `ci` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `ci_exp` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `dir` varchar(600) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `correo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `fono` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `usuario` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nombre` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `paterno` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `materno` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ci` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ci_exp` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `dir` varchar(600) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `correo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `fono` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `acceso` int NOT NULL,
-  `tipo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `foto` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tipo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `foto` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `fecha_registro` date NOT NULL,
   `status` int NOT NULL DEFAULT '1',
   `created_at` timestamp NULL DEFAULT NULL,
@@ -453,7 +480,7 @@ ALTER TABLE `gastos`
 -- AUTO_INCREMENT de la tabla `historial_accions`
 --
 ALTER TABLE `historial_accions`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `migrations`
@@ -465,25 +492,25 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT de la tabla `pagos`
 --
 ALTER TABLE `pagos`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `pago_detalles`
 --
 ALTER TABLE `pago_detalles`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `pago_gastos`
 --
 ALTER TABLE `pago_gastos`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT de la tabla `pago_participantes`
 --
 ALTER TABLE `pago_participantes`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `participantes`
