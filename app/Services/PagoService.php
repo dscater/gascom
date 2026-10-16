@@ -230,7 +230,7 @@ class PagoService
                 $existe = PagoGasto::where("pago_id", $pago->id)
                     ->where("participante_id", $item_participante->participante_id)
                     ->where("pago_participante_id", $item_participante->id)
-                    ->where("pago_detalle_id", $item_detalle->gasto_id)
+                    ->where("pago_detalle_id", $item_detalle->id)
                     ->where("gasto_id", $item_detalle->gasto_id)
                     ->get()->first();
 
@@ -483,7 +483,6 @@ class PagoService
                     "porcentaje_pago" => $item_participante["gasto"]["porcentaje_pago"],
                     "monto_pagado" => $item_participante["gasto"]["monto_pagado"],
                 ]);
-
                 if (!isset($total_participantes[$item_participante["participante"]["participante_id"]])) {
                     $total_participantes[$item_participante["participante"]["participante_id"]] = 0;
                 }
@@ -492,7 +491,7 @@ class PagoService
         }
 
         foreach ($pago->pago_participantes as $participante) {
-            $participante->total = $total_participantes[$participante->id];
+            $participante->total = $total_participantes[$participante->participante_id];
             $participante->save();
         }
 
